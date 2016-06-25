@@ -1,2 +1,2 @@
 # FullCloak
-FullCloak is a plugin for hide players when crouching.
+#####FullCloak site: https://www.spigotmc.org/resources/fullcloak.16214/
