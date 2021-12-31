@@ -1,0 +1,147 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                   GLOBAL SETTINGS                    | #
+# +------------------------------------------------------+ #
+############################################################
+# Language of messages. At the moment there is only "it" and "en". No other values are accepted.
+Locale: en
+# Set to true if the plugin can check for updates.
+Check update: true
+# Set to true to disable the plugin when there is only one player online.
+Disable with only a player: false
+# The delay a player has to wait before becoming invisible. Set to 0 to disable it.
+Delay before invisible: 0
+# Duration, in seconds, of the cooldown that a player has to wait before he can become invisible again.
+Cooldown time: 5
+# Set to false to hide the cooldown message a player receives when he tries to crouch.
+Cooldown message: true
+# Where the cooldown message is displayed. You can choose between "chat", "title" and "actionbar".
+# Note: if "Cooldown message" was set to false the message won't be sent.
+Message type: chat
+# Set to true if a player can move when invisible.
+Can move when invisible: true
+# Between -1 and 1: -1 reverses the direction, 0.2 is the player's default speed and 0.1 is the player's default speed when crouching.
+Speed when invisible: 0.1
+# Maximum time the player can be invisible (in seconds). Set to 0 to disable it.
+# If a user has a permission fullcloak.hide.<time> he can stay invisible for "time" and this limit will be ignored.
+Max second invisible: 5
+# Default particles produced when a player becomes invisible.
+# List of effects (of the latest version): https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Effect.html
+Default particles: ENDER_SIGNAL
+# Set to true if particles have to be reproduced when a player tries to move.
+# Note: if "Can move when invisible" is set to false the particles won't be reproduced.
+Particles when player move: true
+# Set to false to disable the message a player receives when he becomes invisible.
+Message when become invisible: true
+# Set to false to disable the message a player receives when he becomes visible.
+Message when become visible: true
+# Enter the worlds where you want to enable the plugin.
+Worlds:
+- world
+# Set to false if a player can't become invisible when he is tagged with CombatTagPlus.
+Can hide when tagged: true
+# Set to true to make hidden player invisible even to mobs.
+# Note: if the player becomes invisible after becoming the target of the mob, he will remain its target.
+# Instead, if he hides before the mob sees him, he won't be attacked as long as he remains invisible.
+Invisible to mobs: false
+# Set to false if players can't become invisible using /fullcloak hide command.
+Invisible via command: true
+# Set to false if players can't become invisible when crouching (using the Shift key).
+Invisible via Shift: true
+############################################################
+# +------------------------------------------------------+ #
+# |                     MENU ITEMS                       | #
+# +------------------------------------------------------+ #
+############################################################
+# Row - is the number (between 1 and 6) of menu rows - REQUIRED
+# Title - menu title - REQUIRED
+# Item - item material (IDs are no longer supported!) - REQUIRED
+# Name - item's name - OPTIONAL
+# Lore - lore of the item - OPTIONAL
+# Data - item's data (depending on the item and server version this indicates the color, durability...) - OPTIONAL
+# Slot - is the slot number where item will be placed - REQUIRED
+# Command - command executed by player when he clicks on item - OPTIONAL
+# Keep open - menu, must be kept open? - OPTIONAL
+# %default is a placeholder that indicates the default particles (see "Default particles" above)
+Menus:
+  General:
+    Settings:
+      Row: 3
+      Title: '&8FullCloak'
+    Items:
+      Commands:
+        Item: blaze_rod
+        Name: '&f&lCommands'
+        Lore: '&8List of commands'
+        Data: 0
+        Slot: 12
+        Command: 'fullcloak open commands'
+        Keep open: true
+      Particles:
+        Item: blaze_powder
+        Name: '&f&lEffects'
+        Lore: '&8List of effects'
+        Data: 0
+        Slot: 14
+        Command: 'fullcloak open effects'
+        Keep open: true
+
+  Commands:
+    Settings:
+      Row: 1
+      Title: '&8FullCloak commands'
+    Items:
+      Enable:
+        Item: redstone_torch_on
+        Name: '&f&lEnable plugin for you'
+        Slot: 2
+        Command: 'fullcloak enable'
+        Keep open: false
+      Cooldown:
+        Item: watch
+        Name: '&f&lCheck remaining cooldown'
+        Slot: 4
+        Command: 'fullcloak cooldown'
+        Keep open: false
+      Disable:
+        Item: lever
+        Name: '&f&lDisable plugin for you'
+        Slot: 6
+        Command: 'fullcloak disable'
+        Keep open: false
+
+  Effects:
+    Settings:
+      Row: 1
+      Title: '&8FullCloak effects'
+    Items:
+      Mobspawner flames:
+        Item: mob_spawner
+        Name: '&f&lFlames'
+        Slot: 0
+        Command: 'fullcloak effect mobspawner_flames'
+        Keep open: false
+      Ender signal:
+        Item: ender_pearl
+        Name: '&f&lEnder signal'
+        Slot: 1
+        Command: 'fullcloak effect ender_signal'
+        Keep open: false
+      Potion break:
+        Item: potion
+        Name: '&f&lPotion break'
+        Slot: 2
+        Command: 'fullcloak effect potion_break'
+        Keep open: false
+      Smoke:
+        Item: fireball
+        Name: '&f&lSmoke'
+        Slot: 3
+        Command: 'fullcloak effect smoke'
+        Keep open: false
+      Default particles:
+        Item: nether_star
+        Name: '&f&lDefault effect'
+        Slot: 8
+        Command: 'fullcloak effect %default'
+        Keep open: false

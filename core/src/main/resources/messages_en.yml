@@ -1,0 +1,63 @@
+# Use & for color codes. List of colors can be found here: http://goo.gl/VCscSk
+Hide player: '&bNow you are &8invisible.'
+Show player: '&bNow you are &8visible.'
+# When a player tries to become invisible before the cooldown expires.
+# %seconds are the seconds remaining in the cooldown.
+# %type changes the word to plural or singular according to the seconds remaining in the cooldown (see "Seconds" and "Seconds").
+Time left: '&cMust wait %seconds %type to become invisible again.'
+# When a player uses the /fullcloak cooldown command and the cooldown time is over.
+Finished cooldown: '&7You can become invisible again.'
+# When an invisible player tries to hit another player.
+No hit when invisible: '&cYou can''t hit other players while you''re invisible!'
+# When an invisible player tries to move.
+No move when invisible: '&cYou can''t move while you''re invisible!'
+# When a player doesn't have permission.
+No permission: '&cYou don''t have permission!'
+# When the console or a player uses the /fullcloak off command.
+Disabled by command: '&8The plugin has been disabled with success!'
+# When a player reaches the maximum invisibility time.
+Max time reached: '&cYou have reached the maximum time of invisibility.'
+# When a command can only be executed by players.
+Command only for player: '&cThis command can be used only by players.'
+# When a player uses the /fullcloak disable command.
+Plugin disabled for player: '&8The plugin is now disabled for you.'
+# When a player uses the /fullcloak enable command.
+Plugin enabled for player: '&8The plugin is now enabled for you.'
+# When plugin is already disabled.
+Already disabled: '&cThe plugin is already disabled for you!'
+# When plugin is already enabled.
+Already enabled: '&cThe plugin is already enabled for you!'
+# When a player uses the /fullcloak check <player> command.
+# %player is the player name.
+Invisible player: '&b%player &8is invisible.'
+Visible player: '&b%player &8is visible.'
+# When specified player isn't online.
+Player not online: '&c%player &cisn''t online.'
+# When a player doesn't use correctly the /fullcloak check command.
+Check command usage: '&cUse /fullcloak check <player>.'
+# When a player doesn't use correctly the /fullcloak open command.
+Open command usage: '&cUse /fullcloak open <menu>.'
+# When a player doesn't use correctly the /fullcloak effect command.
+Effect command usage: '&cUse /fullcloak effect <effect>.'
+# When a specified menu is not found.
+Menu not found: '&cThis menu doesn''t exist.'
+# When a player tries to select an effect that doesn't exist.
+Effect not found: '&cThis effect doesn''t exist.'
+# When a player successfully selects an effect.
+Particles selected: '&7You have selected the effect %effect.'
+# When a player tries to become invisible while he is tagged (with CombatTagPlus).
+Cannot hide: '&cYou can''t become invisible while you are in combat.'
+# When a player tries to use the /fullcloak hide command which is disabled.
+Command disable: '&cThis command is disabled!'
+# When a player tries to hide again after the delay has already started.
+Already waiting delay: '&cThe delay to wait to become invisible is already active.'
+# When a player gets up (from crouch) before the end of the delay time.
+Delay cancelled: '&cDelay to become invisible cancelled.'
+# When a player tries to hide even if he already is.
+Already invisible: '&cYou are already invisible!'
+# When a player crouches and has to wait for a delay before becoming invisible.
+# %seconds is the delay duration.
+# %type changes the word to plural or singular depending on the duration of the delay (see "Seconds" and "Second").
+Wait for delay: '&bIn %seconds %type you will become invisible.'
+Seconds: 'seconds'
+Second: 'second'

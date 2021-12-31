@@ -1,0 +1,63 @@
+# Usa & per i colori. La lista dei colori può essere trovata qui: http://goo.gl/VCscSk
+Hide player: '&bAdesso sei &8invisibile.'
+Show player: '&bAdesso sei &8visibile.'
+# Quando un giocatore prova a diventare invisibile prima dello scadere del cooldown.
+# %seconds sono i secondi rimanenti nel cooldown.
+# %type cambia la parola al plurale o al singolare in base ai secondi rimanenti nel cooldown (vedi le voci "Seconds" e "Seconds").
+Time left: '&c&lDevi aspettare %seconds %type per diventare nuovamente invisibile.'
+# Quando un giocatore usa il comando /fullcloak cooldown ed il tempo del cooldown è finito.
+Finished cooldown: '&7Puoi tornare nuovamente invisibile.'
+# Quando un giocatore invisibile prova a colpire un altro giocatore.
+No hit when invisible: '&c&lNon puoi colpire gli altri giocatori mentre sei invisibile!'
+# Quando un giocatore invisibile prova a muoversi.
+No move when invisible: '&c&lNon puoi muoverti mentre sei invisibile!'
+# Quando un giocatore non ha il permesso.
+No permission: '&cNon hai il permesso!'
+# Quando la console o un giocatore usa il comando /fullcloak off.
+Disabled by command: '&8Il plugin e'' stato disabilitato con successo!'
+# Quando un giocatore raggiunge il tempo massimo d'invisibilità.
+Max time reached: '&cHai raggiunto il tempo massimo di invisibilita''.'
+# Quando un comando può essere eseguito solo da un giocatore.
+Command only for player: '&cQuesto comando puo'' essere usato solo dai giocatori.'
+# Quando un giocatore usa il comando /fullcloak disable.
+Plugin disabled for player: '&8Il plugin e'' stato disabilitato per te.'
+# Quando un giocatore usa il comando /fullcloak enable.
+Plugin enabled for player: '&8Il plugin e'' stato abilitato per te.'
+# Quando il plugin è già disabilitato.
+Already disabled: '&cIl plugin e'' gia'' disabilitato per te!'
+# Quando il plugin è già abilitato.
+Already enabled: '&cIl plugin e'' gia'' abilitato per te!'
+# Quando un giocatore usa il comando /fullcloak check <giocatore>.
+# %player e' il nome del giocatore.
+Invisible player: '&b%player &8e'' invisibile.'
+Visible player: '&b%player &8e'' visibile.'
+# Quando il giocatore specificato non è online.
+Player not online: '&c%player &cnon e'' online.'
+# Quando un giocatore non utilizza correttamente il comando /fullcloak check.
+Check command usage: '&cUsa /fullcloak check <giocatore>.'
+# Quando un giocatore non utilizza correttamente il comando /fullcloak open.
+Open command usage: '&cUsa /fullcloak open <menu>.'
+# Quando un giocatore non utilizza correttamente il comando /fullcloak effect.
+Effect command usage: '&cUsa /fullcloak effect <effetto>.'
+# Quando uno specifico menu non viene trovato.
+Menu not found: '&cQuesto menu non esiste.'
+# Quando un giocatore prova a selezionare un effetto che non esiste.
+Effect not found: '&cQuesto effetto non esiste.'
+# Quando un giocatore seleziona un effetto con successo.
+Particles selected: '&7Hai selezionato l''effetto %effect.'
+# Quando un giocatore prova a diventare invisibile mentre è in combattimento (con CombatTagPlus).
+Cannot hide: '&cNon puoi diventare invisibile finche'' sei in combattimento.'
+# Quando un giocatore prova a usare il comando /fullcloak hide che però è disabilitato.
+Command disable: '&cQuesto comando è disabilitato!'
+# Quando un giocatore prova a nascondersi di nuovo dopo che è già iniziato il delay.
+Already waiting delay: '&cIl delay da aspettare per diventare invisibile e'' gia'' in corso.'
+# Quando un giocatore si alza (da accovacciato) prima che finisca il tempo di delay.
+Delay cancelled: '&cDelay per diventare invisibile annullato.'
+# Quando un giocatore prova a nascondersi anche se lo è già.
+Already invisible: '&cSei gia'' invisibile!'
+# Quando un giocatore si accovaccia e deve aspettare il delay prima di diventare invisibile.
+# %seconds è la durata del delay.
+# %type cambia la parola al plurale o al singolare in base alla durata del delay (vedi le voci "Seconds" e "Second").
+Wait for delay: '&bTra %seconds %type diventerai invisibile.'
+Seconds: 'secondi'
+Second: 'secondo'

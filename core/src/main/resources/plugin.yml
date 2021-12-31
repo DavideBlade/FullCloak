@@ -1,0 +1,98 @@
+name: FullCloak
+version: ${project.version}
+main: com.gmail.davideblade99.fullcloak.FullCloak
+author: DavideBlade
+description: ${project.description}
+load: POSTWORLD
+website: https://www.spigotmc.org/resources/fullcloak.16214/
+database: false
+softdepend: [CombatTagPlus]
+commands:
+  fullcloak:
+    usage: /<command> [help|off|disable|enable|cooldown|check|open|effect|hide]
+    description: Plugin information.
+
+permissions:
+  fullcloak.*:
+    description: Gives access to all permissions of FullCloak.
+    children:
+      fullcloak.hide: true
+      fullcloak.hide.10: true
+      fullcloak.hide.20: true
+      fullcloak.hide.30: true
+      fullcloak.hide.40: true
+      fullcloak.hide.50: true
+      fullcloak.hide.60: true
+      fullcloak.see: true
+      fullcloak.commands.*: true
+  fullcloak.commands.*:
+    description: Gives access to all commands of FullCloak.
+    children:
+      fullcloak.command.off: true
+      fullcloak.command.cooldown: true
+      fullcloak.command.enable: true
+      fullcloak.command.disable: true
+      fullcloak.command.check: true
+      fullcloak.command.open: true
+      fullcloak.command.effect: true
+      fullcloak.command.hide: true
+  fullcloak.hide:
+    description: Allows becoming invisible while you are crouching.
+    default: op
+  fullcloak.hide.10:
+    description: Allows becoming invisible for 10 seconds.
+    default: op
+    children:
+      fullcloak.hide: true
+  fullcloak.hide.20:
+    description: Allows becoming invisible for 20 seconds.
+    default: op
+    children:
+      fullcloak.hide: true
+  fullcloak.hide.30:
+    description: Allows becoming invisible for 30 seconds.
+    default: op
+    children:
+      fullcloak.hide: true
+  fullcloak.hide.40:
+    description: Allows becoming invisible for 40 seconds.
+    default: op
+    children:
+      fullcloak.hide: true
+  fullcloak.hide.50:
+    description: Allows becoming invisible for 50 seconds.
+    default: op
+    children:
+      fullcloak.hide: true
+  fullcloak.hide.60:
+    description: Allows becoming invisible for 60 seconds.
+    default: op
+    children:
+      fullcloak.hide: true
+  fullcloak.see:
+    description: Allows to see invisible players.
+    default: op
+  fullcloak.command.off:
+    description: Gives access to disable totally the plugin.
+    default: op
+  fullcloak.command.cooldown:
+    description: Gives access to see how long the cooldown stays.
+    default: op
+  fullcloak.command.enable:
+    description: Gives access to enable the plugin for oneself.
+    default: op
+  fullcloak.command.disable:
+    description: Gives access to disable the plugin for oneself.
+    default: op
+  fullcloak.command.check:
+    description: Allows to check if the player is hidden or not.
+    default: op
+  fullcloak.command.open:
+    description: Allows to open the plugin menus.
+    default: op
+  fullcloak.command.effect:
+    description: Gives access to select an effect.
+    default: op
+  fullcloak.command.hide:
+    description: Allows becoming invisible.
+    default: op
