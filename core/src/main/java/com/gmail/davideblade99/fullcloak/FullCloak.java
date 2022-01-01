@@ -26,7 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class FullCloak extends JavaPlugin {
 
-    private final static String[] SUPPORTED_VERSIONS = {"1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17"};
+    private final static String[] SUPPORTED_VERSIONS = {"1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18"};
 
     private static FullCloak instance;
 
@@ -38,19 +38,6 @@ public final class FullCloak extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        final String pluginVersion = getDescription().getVersion();
-        /*TODO Unknown link before publishing the resource
-        new Updater(this).checkForUpdate(new ResponseHandler() {
-            @Override
-            public void onUpdateFound(final String newVersion) {
-                final String currentVersion = pluginVersion.contains(" ") ? pluginVersion.split(" ")[0] : pluginVersion;
-
-                MessageUtil.sendMessageToConsole("&bFound a new version: " + newVersion + " (Yours: v" + currentVersion + ")");
-                MessageUtil.sendMessageToConsole("&bDownload it on spigot:");
-                MessageUtil.sendMessageToConsole("&bspigotmc.org/resources/16214");
-            }
-        });*/
 
         if (!checkVersion()) {
             MessageUtil.sendMessageToConsole("&cThis version of FullCloak only supports the following versions:" + String.join(", ", SUPPORTED_VERSIONS));
@@ -71,6 +58,18 @@ public final class FullCloak extends JavaPlugin {
         }
 
         this.settings = new Settings();
+
+        final String pluginVersion = getDescription().getVersion();
+        new Updater(this).checkForUpdate(new ResponseHandler() {
+            @Override
+            public void onUpdateFound(final String newVersion) {
+                final String currentVersion = pluginVersion.contains(" ") ? pluginVersion.split(" ")[0] : pluginVersion;
+
+                MessageUtil.sendMessageToConsole("&bFound a new version: " + newVersion + " (Yours: v" + currentVersion + ")");
+                MessageUtil.sendMessageToConsole("&bDownload it on spigot:");
+                MessageUtil.sendMessageToConsole("&bspigotmc.org/resources/98851");
+            }
+        });
 
         try {
             Messages.checkMessages();
@@ -165,7 +164,8 @@ public final class FullCloak extends JavaPlugin {
          * "v1_16_R1" -> Server is running 1.16 or 1.16.1
          * "v1_16_R2" -> Server is running 1.16.2 or 1.16.3
          * "v1_16_R3" -> Server is running 1.16.4 or 1.16.5
-         * "v1_17_R1" -> Server runs from 1.17 to 1.17.1 (currently)
+         * "v1_17_R1" -> Server runs from 1.17 to 1.17.1
+         * "v1_18_R1" -> Server runs from 1.18 to 1.18.1 (currently)
          */
 
         try {

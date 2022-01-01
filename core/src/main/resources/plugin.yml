@@ -4,7 +4,7 @@ main: com.gmail.davideblade99.fullcloak.FullCloak
 author: DavideBlade
 description: ${project.description}
 load: POSTWORLD
-#Old-website: https://www.spigotmc.org/resources/fullcloak.16214/
+website: https://www.spigotmc.org/resources/fullcloak.98851/
 database: false
 softdepend: [CombatTagPlus]
 commands:
@@ -85,7 +85,7 @@ permissions:
     description: Gives access to disable the plugin for oneself.
     default: op
   fullcloak.command.check:
-    description: Allows to check if the player is hidden or not.
+    description: Allows to check if a player is hidden or not.
     default: op
   fullcloak.command.open:
     description: Allows to open the plugin menus.
