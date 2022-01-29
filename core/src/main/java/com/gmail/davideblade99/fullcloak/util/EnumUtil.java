@@ -12,6 +12,15 @@ public final class EnumUtil {
         throw new IllegalAccessError();
     }
 
+    /**
+     * Gets the enum for the class
+     *
+     * @param <E>         the type of the enumeration
+     * @param value       the enum name
+     * @param enumClass   the class of the enum to query
+     * @param defaultEnum the default enum
+     * @return the enum, {@code defaultEnum} if not found
+     */
     public static <E extends Enum<E>> E getEnum(final String value, final Class<E> enumClass, final E defaultEnum) {
         try {
             return Enum.valueOf(enumClass, value);
@@ -20,7 +29,19 @@ public final class EnumUtil {
         }
     }
 
+    /**
+     * Gets the enum for the class, ignoring uppercase and lowercase letters
+     *
+     * @param <E>         the type of the enumeration
+     * @param value       the enum name
+     * @param enumClass   the class of the enum to query
+     * @param defaultEnum the default enum
+     * @return the enum, {@code defaultEnum} if not found
+     */
     public static <E extends Enum<E>> E getEnumIgnoreCase(final String value, final Class<E> enumClass, final E defaultEnum) {
+        if (value == null)
+            return defaultEnum;
+
         for (E e : enumClass.getEnumConstants()) {
             if (e.name().equalsIgnoreCase(value))
                 return e;
