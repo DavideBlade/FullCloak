@@ -137,12 +137,12 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
 
             final Player target = Bukkit.getPlayer(args[1]);
-            CommandValidator.notNull(target, Messages.getMessage("Player not online").replace("%player", args[1]));
+            CommandValidator.notNull(target, MessageUtil.replacePlayer("Player not online", args[1]));
 
             if (UserManager.getUser(target).isInvisible())
-                MessageUtil.sendChatMessage(sender, Messages.getMessage("Invisible player").replace("%player", target.getName()));
+                MessageUtil.sendChatMessage(sender, MessageUtil.replacePlayer("Invisible player", target));
             else
-                MessageUtil.sendChatMessage(sender, Messages.getMessage("Visible player").replace("%player", target.getName()));
+                MessageUtil.sendChatMessage(sender, MessageUtil.replacePlayer("Visible player", target));
             return;
         }
 
@@ -204,7 +204,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
 
             UserManager.getUser((Player) sender).setEffect(effect);
-            MessageUtil.sendChatMessage(sender, Messages.getMessage("Particles selected").replace("%effect", effect.toString()));
+            MessageUtil.sendChatMessage(sender, MessageUtil.replaceEffect("Particles selected", effect));
             return;
         }
 
@@ -236,16 +236,15 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
             final long secondsLeft = fcPlayer.getRemainingCooldown();
             if (secondsLeft > 0) { // Cooldown to becoming invisible again is not over yet
-                final String message = Messages.getMessage("Time left");
                 if (settings.sendCooldownMessage())
-                    MessageUtil.sendMessage(player, message.replace("%seconds", String.valueOf(secondsLeft)).replace("%type", Messages.getMessage(MessageUtil.plural(secondsLeft, "Second", "Seconds"))));
+                    MessageUtil.sendMessage(player, MessageUtil.replaceSeconds("Time left", secondsLeft));
 
                 return;
             }
 
             final short delay = settings.getDelayBeforeInvisible();
             if (delay > 0) {
-                MessageUtil.sendMessage(player, Messages.getMessage("Wait for delay").replace("%seconds", String.valueOf(delay)).replace("%type", Messages.getMessage(MessageUtil.plural(delay, "Second", "Seconds"))));
+                MessageUtil.sendMessage(player, MessageUtil.replaceSeconds("Wait for delay", delay));
 
                 final int taskId = Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getPluginManager().callEvent(new BecomeInvisibleEvent(fcPlayer)), 20 * delay).getTaskId();
                 fcPlayer.setDelayTask(taskId);
@@ -269,7 +268,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             }
 
             final long secondsLeft = fcPlayer.getRemainingCooldown();
-            final String message = secondsLeft <= 0 ? Messages.getMessage("Finished cooldown") : Messages.getMessage("Time left").replace("%seconds", String.valueOf(secondsLeft)).replace("%type", Messages.getMessage(MessageUtil.plural(secondsLeft, "Second", "Seconds")));
+            final String message = secondsLeft <= 0 ? Messages.getMessage("Finished cooldown") : MessageUtil.replaceSeconds("Time left", secondsLeft);
 
             MessageUtil.sendMessage(player, message);
             return;

@@ -62,16 +62,15 @@ public final class PlayerToggleSneak implements Listener {
 
             final long secondsLeft = fcPlayer.getRemainingCooldown();
             if (secondsLeft > 0) { // Cooldown to becoming invisible again is not over yet
-                final String message = Messages.getMessage("Time left");
                 if (settings.sendCooldownMessage())
-                    MessageUtil.sendMessage(player, message.replace("%seconds", String.valueOf(secondsLeft)).replace("%type", Messages.getMessage(MessageUtil.plural(secondsLeft, "Second", "Seconds"))));
+                    MessageUtil.sendMessage(player, MessageUtil.replaceSeconds("Time left", secondsLeft));
 
                 return;
             }
 
             final short delay = settings.getDelayBeforeInvisible();
             if (delay > 0) {
-                MessageUtil.sendMessage(player, Messages.getMessage("Wait for delay").replace("%seconds", String.valueOf(delay)).replace("%type", Messages.getMessage(MessageUtil.plural(delay, "Second", "Seconds"))));
+                MessageUtil.sendMessage(player, MessageUtil.replaceSeconds("Wait for delay", delay));
 
                 final int taskId = Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getPluginManager().callEvent(new BecomeInvisibleEvent(fcPlayer)), 20 * delay).getTaskId();
                 fcPlayer.setDelayTask(taskId);
