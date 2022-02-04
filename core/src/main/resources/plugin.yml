@@ -74,28 +74,28 @@ permissions:
     description: Allows to see invisible players.
     default: op
   fullcloak.command.off:
-    description: Gives access to disable totally the plugin.
+    description: Allows you to use the command /fullcloak off.
     default: op
   fullcloak.command.cooldown:
-    description: Gives access to see how long the cooldown stays.
+    description: Allows you to use the command /fullcloak cooldown.
     default: op
   fullcloak.command.enable:
-    description: Gives access to enable the plugin for oneself.
+    description: Allows you to use the command /fullcloak enable.
     default: op
   fullcloak.command.disable:
-    description: Gives access to disable the plugin for oneself.
+    description: Allows you to use the command /fullcloak disable.
     default: op
   fullcloak.command.check:
-    description: Allows to check if a player is hidden or not.
+    description: Allows you to use the command /fullcloak check.
     default: op
   fullcloak.command.open:
-    description: Allows to open the plugin menus.
+    description: Allows you to use the command /fullcloak open.
     default: op
   fullcloak.command.effect:
-    description: Gives access to select an effect.
+    description: Allows you to use the command /fullcloak effect.
     default: op
   fullcloak.command.hide:
-    description: Allows becoming invisible.
+    description: Allows you to use the command /fullcloak hide.
     default: op
   fullcloak.command.reload:
     description: Allows you to use the command /fullcloak reload.
