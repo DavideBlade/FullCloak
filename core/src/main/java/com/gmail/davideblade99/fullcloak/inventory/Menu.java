@@ -7,18 +7,17 @@
 package com.gmail.davideblade99.fullcloak.inventory;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 
-public final class GUI {
+public final class Menu {
 
     private final String title;
     private final byte size;
     private final List<Item> items;
 
-    public GUI(final String title, final byte size, List<Item> items) {
+    public Menu(final String title, final byte size, List<Item> items) {
         this.title = title;
         this.size = size;
         this.items = items;
