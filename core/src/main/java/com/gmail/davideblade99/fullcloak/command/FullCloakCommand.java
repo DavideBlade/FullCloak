@@ -13,7 +13,6 @@ import com.gmail.davideblade99.fullcloak.Settings;
 import com.gmail.davideblade99.fullcloak.event.player.BecomeInvisibleEvent;
 import com.gmail.davideblade99.fullcloak.event.player.BecomeVisibleEvent;
 import com.gmail.davideblade99.fullcloak.inventory.Menu;
-import com.gmail.davideblade99.fullcloak.inventory.MenuInventoryHolder;
 import com.gmail.davideblade99.fullcloak.user.User;
 import com.gmail.davideblade99.fullcloak.user.UserManager;
 import com.gmail.davideblade99.fullcloak.util.EnumUtil;
@@ -110,8 +109,8 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
                     "&8--------[&cFullCloak commands&8]--------",
                     "&8/fullcloak - &cPlugin information.",
                     "&8/fullcloak off - &cDisables totally the plugin.",
-                    "&8/fullcloak disable - &cDisable the plugin for you.",
-                    "&8/fullcloak enable - &cEnable plugin for you.",
+                    "&8/fullcloak disable - &cDisable invisibility via command and shift.",
+                    "&8/fullcloak enable - &cEnable invisibility via command and shift.",
                     "&8/fullcloak cooldown - &cCheck remaining time in cooldown.",
                     "&8/fullcloak check <player> - &cCheck whether the player is hidden or not.",
                     "&8/fullcloak open <menu> - &cOpen the selected menu.",
@@ -163,10 +162,6 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
                 // If the player is hidden, he must become visible again
                 if (fcPlayer.isInvisible())
                     Bukkit.getPluginManager().callEvent(new BecomeVisibleEvent(fcPlayer, false));
-
-                // Close the FullCloak menu
-                if (player.getOpenInventory().getTopInventory().getHolder() instanceof MenuInventoryHolder)
-                    player.closeInventory();
 
                 MessageUtil.sendChatMessage(player, Messages.getMessage("Plugin disabled for player"));
             } else
