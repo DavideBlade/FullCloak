@@ -160,7 +160,9 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             if (!fcPlayer.hasPluginDisabled()) {
                 fcPlayer.setPluginDisabled(true);
 
-                Bukkit.getPluginManager().callEvent(new BecomeVisibleEvent(fcPlayer, false));
+                // If the player is hidden, he must become visible again
+                if (fcPlayer.isInvisible())
+                    Bukkit.getPluginManager().callEvent(new BecomeVisibleEvent(fcPlayer, false));
 
                 // Close the FullCloak menu
                 if (player.getOpenInventory().getTopInventory().getHolder() instanceof MenuInventoryHolder)
