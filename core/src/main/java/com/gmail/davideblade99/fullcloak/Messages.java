@@ -48,7 +48,8 @@ public final class Messages {
             "Already invisible",
             "Wait for delay",
             "Seconds",
-            "Second"
+            "Second",
+            "Plugin reloaded"
     };
 
     private Messages() {
@@ -79,7 +80,9 @@ public final class Messages {
 
             loadMessages(messagesFile);
 
-            MessageUtil.sendMessageToConsole("&cNot found all messages in messages_" + extension + ". It has been renamed to " + broken.getName());
+            MessageUtil.sendMessageToConsole("&cNot found all messages in messages_" + extension + ".");
+            MessageUtil.sendMessageToConsole("&cA new file has been created.");
+            MessageUtil.sendMessageToConsole("&cThe old file has been renamed to \"" + broken.getName() + "\".");
         }
     }
 

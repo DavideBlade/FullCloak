@@ -32,6 +32,7 @@ public final class BecomeVisible implements Listener {
         final Player player = fcPlayer.getPlayer();
         final Settings settings = plugin.getSettings();
 
+        // Show hidden player
         for (Player p : Bukkit.getOnlinePlayers())
             p.showPlayer(player);
 

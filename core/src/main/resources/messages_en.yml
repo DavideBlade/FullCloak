@@ -6,7 +6,7 @@ Show player: '&bNow you are &8visible.'
 # %type changes the word to plural or singular according to the seconds remaining in the cooldown (see "Seconds" and "Seconds").
 Time left: '&cMust wait %seconds %type to become invisible again.'
 # When a player uses the /fullcloak cooldown command and the cooldown time is over.
-Finished cooldown: '&7You can become invisible again.'
+Finished cooldown: '&bYou can become invisible again.'
 # When an invisible player tries to hit another player.
 No hit when invisible: '&cYou can''t hit other players while you''re invisible!'
 # When an invisible player tries to move.
@@ -14,15 +14,15 @@ No move when invisible: '&cYou can''t move while you''re invisible!'
 # When a player doesn't have permission.
 No permission: '&cYou don''t have permission!'
 # When the console or a player uses the /fullcloak off command.
-Disabled by command: '&8The plugin has been disabled with success!'
+Disabled by command: '&bThe plugin has been disabled with success!'
 # When a player reaches the maximum invisibility time.
 Max time reached: '&cYou have reached the maximum time of invisibility.'
 # When a command can only be executed by players.
 Command only for player: '&cThis command can be used only by players.'
 # When a player uses the /fullcloak disable command.
-Plugin disabled for player: '&8The plugin is now disabled for you.'
+Plugin disabled for player: '&bThe plugin is now disabled for you.'
 # When a player uses the /fullcloak enable command.
-Plugin enabled for player: '&8The plugin is now enabled for you.'
+Plugin enabled for player: '&bThe plugin is now enabled for you.'
 # When plugin is already disabled.
 Already disabled: '&cThe plugin is already disabled for you!'
 # When plugin is already enabled.
@@ -44,7 +44,7 @@ Menu not found: '&cThis menu doesn''t exist.'
 # When a player tries to select an effect that doesn't exist.
 Effect not found: '&cThis effect doesn''t exist.'
 # When a player successfully selects an effect.
-Particles selected: '&7You have selected the effect %effect.'
+Particles selected: '&bYou have selected the effect %effect.'
 # When a player tries to become invisible while he is tagged (with CombatTagPlus).
 Cannot hide: '&cYou can''t become invisible while you are in combat.'
 # When a player tries to use the /fullcloak hide command which is disabled.
@@ -61,3 +61,5 @@ Already invisible: '&cYou are already invisible!'
 Wait for delay: '&bIn %seconds %type you will become invisible.'
 Seconds: 'seconds'
 Second: 'second'
+# When the /fullcloak reload command is executed
+Plugin reloaded: '&bPlugin reloaded with success.'

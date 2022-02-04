@@ -7,7 +7,7 @@
     <groupId>com.gmail.davideblade99.fullcloak</groupId>
     <artifactId>fullcloak-parent</artifactId>
     <name>FullCloak Parent</name>
-    <version>3.3.2</version>
+    <version>3.3.3</version>
     <packaging>pom</packaging>
 
     <url>https://davideblade.github.io</url>

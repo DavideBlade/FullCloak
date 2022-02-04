@@ -11,7 +11,9 @@ import com.gmail.davideblade99.fullcloak.Messages;
 import com.gmail.davideblade99.fullcloak.Permissions;
 import com.gmail.davideblade99.fullcloak.Settings;
 import com.gmail.davideblade99.fullcloak.event.player.BecomeInvisibleEvent;
-import com.gmail.davideblade99.fullcloak.inventory.GUI;
+import com.gmail.davideblade99.fullcloak.event.player.BecomeVisibleEvent;
+import com.gmail.davideblade99.fullcloak.inventory.Menu;
+import com.gmail.davideblade99.fullcloak.inventory.MenuInventoryHolder;
 import com.gmail.davideblade99.fullcloak.user.User;
 import com.gmail.davideblade99.fullcloak.user.UserManager;
 import com.gmail.davideblade99.fullcloak.util.EnumUtil;
@@ -58,7 +60,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
         switch (args.length) {
             case 1:
-                StringUtil.copyPartialMatches(args[0], Arrays.asList("help", "off", "disable", "enable", "cooldown", "check", "open", "effect", "hide"), completions);
+                StringUtil.copyPartialMatches(args[0], Arrays.asList("help", "off", "disable", "enable", "cooldown", "check", "open", "effect", "hide", "reload"), completions);
                 break;
 
             case 2:
@@ -66,7 +68,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
                 StringUtil.copyPartialMatches(args[0], Arrays.asList("check", "open", "effect"), arg);
 
                 if (arg.size() != 1)
-                    return null;
+                    return completions;
 
                 if (arg.contains("check")) {
                     for (Player p : Bukkit.getOnlinePlayers())
@@ -83,7 +85,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
                 break;
 
             default:
-                return null;
+                return completions;
         }
 
         Collections.sort(completions);
@@ -114,7 +116,8 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
                     "&8/fullcloak check <player> - &cCheck whether the player is hidden or not.",
                     "&8/fullcloak open <menu> - &cOpen the selected menu.",
                     "&8/fullcloak effect <effect name> - &cSelect an effect.",
-                    "&8/fullcloak hide - &cBecome invisible."
+                    "&8/fullcloak hide - &cBecome invisible.",
+                    "&8/fullcloak reload - &cReload plugin."
             };
             MessageUtil.sendChatMessage(sender, message, false);
             return;
@@ -125,8 +128,8 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             CommandValidator.isTrue(sender.hasPermission(Permissions.COMMAND_BASE + "off"), Messages.getMessage("No permission"));
 
 
+            plugin.setPluginDisabled();
             MessageUtil.sendChatMessage(sender, Messages.getMessage("Disabled by command"));
-            plugin.disablePlugin();
             return;
         }
 
@@ -156,6 +159,13 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
             if (!fcPlayer.hasPluginDisabled()) {
                 fcPlayer.setPluginDisabled(true);
+
+                Bukkit.getPluginManager().callEvent(new BecomeVisibleEvent(fcPlayer, false));
+
+                // Close the FullCloak menu
+                if (player.getOpenInventory().getTopInventory().getHolder() instanceof MenuInventoryHolder)
+                    player.closeInventory();
+
                 MessageUtil.sendChatMessage(player, Messages.getMessage("Plugin disabled for player"));
             } else
                 MessageUtil.sendChatMessage(player, Messages.getMessage("Already disabled"));
@@ -185,7 +195,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             CommandValidator.isTrue(sender.hasPermission(Permissions.COMMAND_BASE + "open"), Messages.getMessage("No permission"));
 
 
-            final GUI menu = FullCloak.getInstance().getSettings().getMenu(args[1]);
+            final Menu menu = FullCloak.getInstance().getSettings().getMenu(args[1]);
             if (menu != null) {
                 ((Player) sender).openInventory(menu.getInventory());
             } else
@@ -271,6 +281,16 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             final String message = secondsLeft <= 0 ? Messages.getMessage("Finished cooldown") : MessageUtil.replaceSeconds("Time left", secondsLeft);
 
             MessageUtil.sendMessage(player, message);
+            return;
+        }
+
+
+        if (args[0].equalsIgnoreCase("reload")) {
+            CommandValidator.isTrue(sender.hasPermission(Permissions.COMMAND_BASE + "reload"), Messages.getMessage("No permission"));
+
+            FullCloak.getInstance().reloadPlugin();
+
+            MessageUtil.sendChatMessage(sender, Messages.getMessage("Plugin reloaded"));
             return;
         }
 

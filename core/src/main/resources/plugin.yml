@@ -9,7 +9,7 @@ database: false
 softdepend: [CombatTagPlus]
 commands:
   fullcloak:
-    usage: /<command> [help|off|disable|enable|cooldown|check|open|effect|hide]
+    usage: /<command> [help|off|disable|enable|cooldown|check|open|effect|hide|reload]
     description: Plugin information.
 
 permissions:
@@ -36,6 +36,7 @@ permissions:
       fullcloak.command.open: true
       fullcloak.command.effect: true
       fullcloak.command.hide: true
+      fullcloak.command.reload: true
   fullcloak.hide:
     description: Allows becoming invisible while you are crouching.
     default: op
@@ -95,4 +96,7 @@ permissions:
     default: op
   fullcloak.command.hide:
     description: Allows becoming invisible.
+    default: op
+  fullcloak.command.reload:
+    description: Allows you to use the command /fullcloak reload.
     default: op

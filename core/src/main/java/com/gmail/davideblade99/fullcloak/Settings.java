@@ -8,8 +8,8 @@ package com.gmail.davideblade99.fullcloak;
 
 import com.gmail.davideblade99.fullcloak.Messages.Language;
 import com.gmail.davideblade99.fullcloak.Messages.MessageType;
-import com.gmail.davideblade99.fullcloak.inventory.GUI;
 import com.gmail.davideblade99.fullcloak.inventory.Item;
+import com.gmail.davideblade99.fullcloak.inventory.Menu;
 import com.gmail.davideblade99.fullcloak.util.EnumUtil;
 import com.gmail.davideblade99.fullcloak.util.FileUtil;
 import com.gmail.davideblade99.fullcloak.util.MessageUtil;
@@ -54,13 +54,20 @@ public final class Settings {
     /*
      * Menu settings
      */
-    private final Map<String, GUI> menus = new HashMap<>();
+    private final Map<String, Menu> menus = new HashMap<>();
 
     Settings() {
         final File configFile = FileUtil.CONFIG_FILE;
         if (!configFile.exists())
             FileUtil.copyFile("config.yml", configFile);
 
+        /*
+         * Without reloadConfig(), when reloading the single plugin,
+         * the config would not be reloaded but the old configuration
+         * would be used.
+         * If the whole server is reloaded, this method is unnecessary.
+         */
+        FullCloak.getInstance().reloadConfig();
         final FileConfiguration config = FullCloak.getInstance().getConfig();
 
         // Check the language
@@ -206,11 +213,11 @@ public final class Settings {
         return hideViaShift;
     }
 
-    public Map<String, GUI> getMenus() {
+    public Map<String, Menu> getMenus() {
         return menus;
     }
 
-    public GUI getMenu(final String menuName) {
+    public Menu getMenu(final String menuName) {
         return menus.get(menuName.toLowerCase());
     }
 
@@ -290,7 +297,7 @@ public final class Settings {
                 items.add(new Item(material, data, displayName, lore, slot, command, keepOpen));
             }
 
-            this.menus.put(menuName.toLowerCase(), new GUI(title, size, items));
+            this.menus.put(menuName.toLowerCase(), new Menu(title, size, items));
         }
     }
 }

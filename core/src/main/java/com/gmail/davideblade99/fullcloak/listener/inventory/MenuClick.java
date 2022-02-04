@@ -6,8 +6,8 @@
 
 package com.gmail.davideblade99.fullcloak.listener.inventory;
 
-import com.gmail.davideblade99.fullcloak.inventory.GUI;
 import com.gmail.davideblade99.fullcloak.inventory.Item;
+import com.gmail.davideblade99.fullcloak.inventory.Menu;
 import com.gmail.davideblade99.fullcloak.inventory.MenuInventoryHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -37,7 +37,7 @@ public final class MenuClick implements Listener {
 
         e.setCancelled(true);
 
-        final GUI menu = ((MenuInventoryHolder) topInv.getHolder()).getMenu(); // Menu clicked
+        final Menu menu = ((MenuInventoryHolder) topInv.getHolder()).getMenu(); // Menu clicked
         final Player player = (Player) e.getWhoClicked(); // Player that clicked the item
         for (Item item : menu.getItems()) {
             if (e.getSlot() == item.getSlot()) {

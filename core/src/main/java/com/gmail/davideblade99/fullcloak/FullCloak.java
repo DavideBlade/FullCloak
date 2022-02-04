@@ -41,19 +41,19 @@ public final class FullCloak extends JavaPlugin {
 
         if (!checkVersion()) {
             MessageUtil.sendMessageToConsole("&cThis version of FullCloak only supports the following versions:" + String.join(", ", SUPPORTED_VERSIONS));
-            disablePlugin();
+            setPluginDisabled();
             return;
         }
 
         if (!setupActionbar()) {
             MessageUtil.sendMessageToConsole("&cFailed to setup action bar. Your server version is not unknown.");
-            disablePlugin();
+            setPluginDisabled();
             return;
         }
 
         if (!setupTitle()) {
             MessageUtil.sendMessageToConsole("&cFailed to setup title. Your server version is not unknown.");
-            disablePlugin();
+            setPluginDisabled();
             return;
         }
 
@@ -74,12 +74,12 @@ public final class FullCloak extends JavaPlugin {
         try {
             Messages.checkMessages();
         } catch (final InvalidConfigurationException ignored) {
-            disablePlugin();
+            setPluginDisabled();
             return;
         }
 
         if (!checkHooks()) {
-            disablePlugin();
+            setPluginDisabled();
             return;
         }
 
@@ -124,8 +124,22 @@ public final class FullCloak extends JavaPlugin {
         return combatTagPlus;
     }
 
-    public void disablePlugin() {
-        setEnabled(false);
+    public void setPluginDisabled() {
+        Bukkit.getPluginManager().disablePlugin(this);
+    }
+
+    /**
+     * Reload the plugin safely by performing the whole disabling phase and then the enabling phase.
+     * It is not designed to allow loading a new .jar (and never will be).
+     * In that case the whole server must be restarted/reloaded to avoid problems.
+     * More specifically, it is necessary to restart the whole server as this
+     * allows Spigot to unload the current .jar file from the JVM and load the updated one.
+     * If the .jar is replaced and then the plugin is reloaded, nothing will happen:
+     * the old .jar will be the one used as if it had never been replaced.
+     */
+    public void reloadPlugin() {
+        Bukkit.getPluginManager().disablePlugin(this);
+        Bukkit.getPluginManager().enablePlugin(this);
     }
 
     private boolean checkHooks() {
@@ -227,7 +241,7 @@ public final class FullCloak extends JavaPlugin {
         if (command == null) {
             MessageUtil.sendMessageToConsole("&cFullCloak was unable to register the command \"fullcloak\".", false);
             MessageUtil.sendMessageToConsole("&cThis can be caused by edits to plugin.yml or other plugins.", false);
-            disablePlugin();
+            setPluginDisabled();
             return;
         }
 

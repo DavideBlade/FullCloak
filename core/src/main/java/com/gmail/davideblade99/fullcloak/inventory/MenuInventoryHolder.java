@@ -11,9 +11,9 @@ import org.bukkit.inventory.InventoryHolder;
 
 public final class MenuInventoryHolder implements InventoryHolder {
 
-    private final GUI menu;
+    private final Menu menu;
 
-    public MenuInventoryHolder(GUI menu) {
+    public MenuInventoryHolder(Menu menu) {
         this.menu = menu;
     }
 
@@ -22,7 +22,7 @@ public final class MenuInventoryHolder implements InventoryHolder {
         throw new UnsupportedOperationException();
     }
 
-    public GUI getMenu() {
+    public Menu getMenu() {
         return menu;
     }
 }
