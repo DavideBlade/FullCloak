@@ -42,7 +42,7 @@ final class Updater {
             @Override
             public void run() {
                 try {
-                    final HttpURLConnection con = (HttpURLConnection) new URL("https://api.spigotmc.org/legacy/update.php?resource=16214").openConnection();
+                    final HttpURLConnection con = (HttpURLConnection) new URL("https://api.spigotmc.org/legacy/update.php?resource=98851").openConnection();
                     final String newVersion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
 
                     if (isNewerVersion(newVersion)) {
