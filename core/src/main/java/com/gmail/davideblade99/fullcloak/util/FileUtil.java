@@ -7,9 +7,11 @@
 package com.gmail.davideblade99.fullcloak.util;
 
 import com.gmail.davideblade99.fullcloak.FullCloak;
-import org.apache.commons.lang.reflect.FieldUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public final class FileUtil {
 
@@ -22,8 +24,8 @@ public final class FileUtil {
     /**
      * Copy an embedded file to another location
      *
-     * @param inFile - the name of embedded file to be copied
-     * @param outFile - the file where specified embedded file should be copied
+     * @param inFile  the name of embedded file to be copied
+     * @param outFile the file where specified embedded file should be copied
      */
     public static void copyFile(final String inFile, final File outFile) {
         outFile.getParentFile().mkdirs(); // Create output folder
