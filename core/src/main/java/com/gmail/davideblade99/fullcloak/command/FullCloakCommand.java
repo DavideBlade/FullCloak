@@ -97,6 +97,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
                     "&8------------[&cFullCloak&8]------------",
                     "&8Developer: &cDavideBlade",
                     "&8Version: &c" + plugin.getDescription().getVersion(),
+                    "&8Command aliases: &c/fullcloak, /fc",
                     "&8Help: &c/fullcloak help"
             };
             MessageUtil.sendChatMessage(sender, message, false);
@@ -108,15 +109,15 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             final String[] message = {
                     "&8--------[&cFullCloak commands&8]--------",
                     "&8/fullcloak - &cPlugin information.",
-                    "&8/fullcloak off - &cDisables totally the plugin.",
-                    "&8/fullcloak disable - &cDisable invisibility via command and shift.",
-                    "&8/fullcloak enable - &cEnable invisibility via command and shift.",
-                    "&8/fullcloak cooldown - &cCheck remaining time in cooldown.",
-                    "&8/fullcloak check <player> - &cCheck whether the player is hidden or not.",
-                    "&8/fullcloak open <menu> - &cOpen the selected menu.",
-                    "&8/fullcloak effect <effect name> - &cSelect an effect.",
-                    "&8/fullcloak hide - &cBecome invisible.",
-                    "&8/fullcloak reload - &cReload plugin."
+                    "&8/fc off - &cDisables totally the plugin.",
+                    "&8/fc disable - &cDisable invisibility.",
+                    "&8/fc enable - &cEnable invisibility.",
+                    "&8/fc cooldown - &cCheck remaining time in cooldown.",
+                    "&8/fc check <player> - &cCheck if the player is hidden.",
+                    "&8/fc open <menu> - &cOpen the selected plugin menu.",
+                    "&8/fc effect <effect name> - &cSelect an effect.",
+                    "&8/fc hide - &cBecome invisible.",
+                    "&8/fc reload - &cReload plugin."
             };
             MessageUtil.sendChatMessage(sender, message, false);
             return;
@@ -127,7 +128,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
             CommandValidator.isTrue(sender.hasPermission(Permissions.COMMAND_BASE + "off"), Messages.getMessage("No permission"));
 
 
-            plugin.setPluginDisabled();
+            plugin.disablePlugin();
             MessageUtil.sendChatMessage(sender, Messages.getMessage("Disabled by command"));
             return;
         }

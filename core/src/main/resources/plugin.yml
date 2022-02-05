@@ -10,6 +10,7 @@ softdepend: [CombatTagPlus]
 commands:
   fullcloak:
     usage: /<command> [help|off|disable|enable|cooldown|check|open|effect|hide|reload]
+    aliases: fc
     description: Plugin information.
 
 permissions:
