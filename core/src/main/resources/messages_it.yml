@@ -20,9 +20,9 @@ Max time reached: '&cHai raggiunto il tempo massimo di invisibilita''.'
 # Quando un comando può essere eseguito solo da un giocatore.
 Command only for player: '&cQuesto comando puo'' essere usato solo dai giocatori.'
 # Quando un giocatore usa il comando /fullcloak disable.
-Plugin disabled for player: '&bIl plugin e'' stato disabilitato per te.'
+Plugin disabled for player: '&bNon potrai più diventare invisibile tramite comando o tramite Shift. Se vuoi attivare di nuovo la funzione usa /fullcloak enable.'
 # Quando un giocatore usa il comando /fullcloak enable.
-Plugin enabled for player: '&bIl plugin e'' stato abilitato per te.'
+Plugin enabled for player: '&bPotrai di nuovo diventare invisibile tramite comando o tramite Shift.'
 # Quando il plugin è già disabilitato.
 Already disabled: '&cIl plugin e'' gia'' disabilitato per te!'
 # Quando il plugin è già abilitato.
