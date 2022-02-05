@@ -20,11 +20,12 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.gmail.davideblade99.fullcloak.util.FileUtil.CONFIG_FILE;
 
 public final class Settings {
 
@@ -57,9 +58,22 @@ public final class Settings {
     private final Map<String, Menu> menus = new HashMap<>();
 
     Settings() {
-        final File configFile = FileUtil.CONFIG_FILE;
-        if (!configFile.exists())
-            FileUtil.copyFile("config.yml", configFile);
+        if (!CONFIG_FILE.exists()) {
+            if (System.getProperty("FullCloakReloaded") == null) // If the plugin has not been reloaded with /fulcloak reload
+                FileUtil.copyFile("config.yml", CONFIG_FILE);
+            else
+            {
+                /*
+                 * When the plugin is reloaded with /fullcloak reload the files within
+                 * the .jar are not detected. So if the files have been deleted from the
+                 * plugin's folder, there is no way to recreate them.
+                 * The entire server must be reloaded or restarted.
+                 */
+                MessageUtil.sendMessageToConsole("&cThe config.yml file has not been found: /fullcloak reload is not designed to recreate files from scratch but only to reload some updated parameters.");
+                MessageUtil.sendMessageToConsole("&cIf you want to recreate them, you need to reload/restart the server.");
+                MessageUtil.sendMessageToConsole("&cThe configuration file will not be created but default values will be used.");
+            }
+        }
 
         /*
          * Without reloadConfig(), when reloading the single plugin,

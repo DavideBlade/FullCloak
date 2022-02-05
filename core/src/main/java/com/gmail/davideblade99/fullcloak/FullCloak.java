@@ -41,19 +41,19 @@ public final class FullCloak extends JavaPlugin {
 
         if (!checkVersion()) {
             MessageUtil.sendMessageToConsole("&cThis version of FullCloak only supports the following versions:" + String.join(", ", SUPPORTED_VERSIONS));
-            setPluginDisabled();
+            disablePlugin();
             return;
         }
 
         if (!setupActionbar()) {
             MessageUtil.sendMessageToConsole("&cFailed to setup action bar. Your server version is not unknown.");
-            setPluginDisabled();
+            disablePlugin();
             return;
         }
 
         if (!setupTitle()) {
             MessageUtil.sendMessageToConsole("&cFailed to setup title. Your server version is not unknown.");
-            setPluginDisabled();
+            disablePlugin();
             return;
         }
 
@@ -74,12 +74,12 @@ public final class FullCloak extends JavaPlugin {
         try {
             Messages.checkMessages();
         } catch (final InvalidConfigurationException ignored) {
-            setPluginDisabled();
+            disablePlugin();
             return;
         }
 
         if (!checkHooks()) {
-            setPluginDisabled();
+            disablePlugin();
             return;
         }
 
@@ -124,7 +124,7 @@ public final class FullCloak extends JavaPlugin {
         return combatTagPlus;
     }
 
-    public void setPluginDisabled() {
+    public void disablePlugin() {
         Bukkit.getPluginManager().disablePlugin(this);
     }
 
@@ -138,8 +138,12 @@ public final class FullCloak extends JavaPlugin {
      * the old .jar will be the one used as if it had never been replaced.
      */
     public void reloadPlugin() {
+        System.setProperty("FullCloakReloaded", "1"); // This is used to determine whether the /fullcloak reload command has been used
+
         Bukkit.getPluginManager().disablePlugin(this);
         Bukkit.getPluginManager().enablePlugin(this);
+
+        System.clearProperty("FullCloakReloaded");
     }
 
     private boolean checkHooks() {
@@ -241,7 +245,7 @@ public final class FullCloak extends JavaPlugin {
         if (command == null) {
             MessageUtil.sendMessageToConsole("&cFullCloak was unable to register the command \"fullcloak\".", false);
             MessageUtil.sendMessageToConsole("&cThis can be caused by edits to plugin.yml or other plugins.", false);
-            setPluginDisabled();
+            disablePlugin();
             return;
         }
 

@@ -66,8 +66,23 @@ public final class Messages {
         final String extension = pluginInstance.getSettings().getLanguage().toString();
         final File messagesFile = new File(pluginInstance.getDataFolder() + "/messages", "messages_" + extension + ".yml");
 
-        if (!messagesFile.exists())
-            FileUtil.copyFile("messages_" + extension + ".yml", messagesFile);
+        if (!messagesFile.exists()) {
+            if (System.getProperty("FullCloakReloaded") == null) // If the plugin has not been reloaded with /fulcloak reload
+                FileUtil.copyFile("messages_" + extension + ".yml", messagesFile);
+            else
+            {
+                /*
+                 * When the plugin is reloaded with /fullcloak reload the files within
+                 * the .jar are not detected. So if the files have been deleted from the
+                 * plugin's folder, there is no way to recreate them.
+                 * The entire server must be reloaded or restarted.
+                 */
+                MessageUtil.sendMessageToConsole("&cThe message file has not been found: /fullcloak reload is not designed to recreate files from scratch but only to reload some minor changes.");
+                MessageUtil.sendMessageToConsole("&cIf you want to recreate them, you need to reload/restart the server.");
+                MessageUtil.sendMessageToConsole("&cThe message file will not be created.");
+                return;
+            }
+        }
 
         loadMessages(messagesFile);
 
