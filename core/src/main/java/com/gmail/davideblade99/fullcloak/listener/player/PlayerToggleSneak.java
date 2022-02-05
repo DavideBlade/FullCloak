@@ -34,12 +34,13 @@ public final class PlayerToggleSneak implements Listener {
     public void onPlayerToggleSneak(final PlayerToggleSneakEvent e) {
         final Player player = e.getPlayer();
         final Settings settings = plugin.getSettings();
-        final User fcPlayer = UserManager.getUser(player);
 
         if (settings.isDisabledWorld(player.getWorld()) || !player.hasPermission(Permissions.HIDE))
             return;
         if (settings.isDisabledWithOnePlayer() && !(Bukkit.getOnlinePlayers().size() >= 1))
             return;
+
+        final User fcPlayer = UserManager.getUser(player);
         if (fcPlayer.hasPluginDisabled()) // If player has disabled the plugin
             return;
 
