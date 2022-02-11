@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 public final class MessageUtil {
 
     private final static char COLOR_CHAR = '&';
-    private final static String PREFIX = "&8[FullCloak] ";
+    private final static String PREFIX = "&8[FullCloak]&r ";
 
     private MessageUtil() {
         throw new IllegalAccessError();
