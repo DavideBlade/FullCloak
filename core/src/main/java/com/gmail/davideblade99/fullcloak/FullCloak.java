@@ -20,6 +20,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,7 +76,8 @@ public final class FullCloak extends JavaPlugin {
 
         try {
             Messages.checkMessages();
-        } catch (final InvalidConfigurationException ignored) {
+        }
+        catch (final InvalidConfigurationException ignored) {
             disablePlugin();
             return;
         }
@@ -99,6 +102,10 @@ public final class FullCloak extends JavaPlugin {
         // Necessary in case of server reload
         closeAllOpenMenu();
         makePlayersVisible();
+
+        // Generic shutdown
+        Bukkit.getScheduler().cancelTasks(this);
+        HandlerList.unregisterAll(this);
 
         instance = null;
         actionbar = null;
@@ -126,7 +133,13 @@ public final class FullCloak extends JavaPlugin {
     }
 
     public void disablePlugin() {
-        Bukkit.getPluginManager().disablePlugin(this);
+        if (isEnabled()) {
+            // Notify that the plugin will be disabled
+            Bukkit.getPluginManager().callEvent(new PluginDisableEvent(this));
+
+            // Disable the plugin
+            setEnabled(false);
+        }
     }
 
     /**
@@ -192,7 +205,8 @@ public final class FullCloak extends JavaPlugin {
             String packageName = FullCloak.class.getPackage().getName();
             String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             actionbar = (ActionBar) Class.forName(packageName + ".nms.ActionBar_" + internalsName).getDeclaredConstructor().newInstance();
-        } catch (final Exception unknownVersion) {
+        }
+        catch (final Exception unknownVersion) {
             return false;
         }
 
@@ -204,7 +218,8 @@ public final class FullCloak extends JavaPlugin {
             String packageName = FullCloak.class.getPackage().getName();
             String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             title = (Title) Class.forName(packageName + ".nms.Title_" + internalsName).getDeclaredConstructor().newInstance();
-        } catch (final Exception unknownVersion) {
+        }
+        catch (final Exception unknownVersion) {
             return false;
         }
 
