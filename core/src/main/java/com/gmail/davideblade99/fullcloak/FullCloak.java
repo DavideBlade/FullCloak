@@ -57,6 +57,7 @@ public final class FullCloak extends JavaPlugin {
             return;
         }
 
+
         this.settings = new Settings();
 
         final String pluginVersion = getDescription().getVersion();
@@ -183,7 +184,8 @@ public final class FullCloak extends JavaPlugin {
          * "v1_16_R2" -> Server is running 1.16.2 or 1.16.3
          * "v1_16_R3" -> Server is running 1.16.4 or 1.16.5
          * "v1_17_R1" -> Server runs from 1.17 to 1.17.1
-         * "v1_18_R1" -> Server runs from 1.18 to 1.18.1 (currently)
+         * "v1_18_R1" -> Server runs from 1.18 to 1.18.1
+         * "v1_18_R2" -> Server runs 1.18.2 (currently)
          */
 
         try {
