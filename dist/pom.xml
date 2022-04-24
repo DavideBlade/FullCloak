@@ -152,6 +152,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>fullcloak-nms-v1_18_r1</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>fullcloak-nms-v1_18_r2</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
