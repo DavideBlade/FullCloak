@@ -50,6 +50,8 @@ Invisible via command: true
 Invisible via Shift: true
 # Set to false to prevent invisible players from hitting other players (even with potions).
 Allow invisible player hit: false
+# When an invisible player hits another (visible) player, should he become visible again?
+Disable invisibility on hit: false
 ############################################################
 # +------------------------------------------------------+ #
 # |                     MENU ITEMS                       | #

@@ -8,8 +8,12 @@ package com.gmail.davideblade99.fullcloak.listener.player;
 
 import com.gmail.davideblade99.fullcloak.FullCloak;
 import com.gmail.davideblade99.fullcloak.Messages;
+import com.gmail.davideblade99.fullcloak.Settings;
+import com.gmail.davideblade99.fullcloak.event.player.BecomeVisibleEvent;
+import com.gmail.davideblade99.fullcloak.user.User;
 import com.gmail.davideblade99.fullcloak.user.UserManager;
 import com.gmail.davideblade99.fullcloak.util.MessageUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -25,8 +29,16 @@ import static org.bukkit.GameMode.CREATIVE;
 
 public final class PlayerHit implements Listener {
 
+    private final FullCloak plugin;
+
+    public PlayerHit(final FullCloak instance) {
+        this.plugin = instance;
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDamage(final EntityDamageByEntityEvent event) {
+        final Settings settings = plugin.getSettings();
+
         final Entity target = event.getEntity();
         if (!(target instanceof Player)) // If the hit entity isn't a player
             return;
@@ -39,27 +51,38 @@ public final class PlayerHit implements Listener {
         final Player attackerPlayer = (Player) attacker;
         if (attackerPlayer.equals(target)) // If the player hit himself
             return;
-        if (!UserManager.getUser(attackerPlayer).isInvisible()) // If not hidden
+
+        final User fcPlayer = UserManager.getUser(attackerPlayer); // Attacker
+        if (!fcPlayer.isInvisible()) // If not hidden
             return;
 
         // If invisible players can't hit other players
-        if (!FullCloak.getInstance().getSettings().canHitWhenInvisible()) {
+        if (!settings.canHitWhenInvisible()) {
             event.setCancelled(true);
 
             MessageUtil.sendChatMessage(attackerPlayer, Messages.getMessage("No hit when invisible"));
+        }
+
+        if (settings.disableInvisibilityOnHit()) {
+            // If the player becomes visibile before reaching (if set) the maximum invisibility time
+            if (fcPlayer.hasMaxInvisibilityTime())
+                fcPlayer.cancelMaxInvisibilityTimeTask();
+
+            Bukkit.getPluginManager().callEvent(new BecomeVisibleEvent(fcPlayer, false));
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPotionSplash(final PotionSplashEvent e) {
+        final Settings settings = plugin.getSettings();
+
         final Entity attacker = (Entity) e.getPotion().getShooter();
         if (!(attacker instanceof Player))
             return;
 
         final Player attackerPlayer = (Player) attacker;
-        if (!UserManager.getUser(attackerPlayer).isInvisible()) // If not hidden
-            return;
-        if (FullCloak.getInstance().getSettings().canHitWhenInvisible()) // If invisible players can "hit" other players
+        final User fcPlayer = UserManager.getUser(attackerPlayer); // Attacker
+        if (!fcPlayer.isInvisible()) // If not hidden
             return;
 
         for (LivingEntity target : e.getAffectedEntities()) {
@@ -68,16 +91,28 @@ public final class PlayerHit implements Listener {
             if (attackerPlayer.equals(target)) // If the player hit himself
                 continue;
 
-            e.setCancelled(true);
+            // If invisible players can't hit other players
+            if (!settings.canHitWhenInvisible()) {
+                e.setCancelled(true);
 
-            /*
-             * If the player has consumed the potion (so he is not in creative) and
-             * still has a free slot in the inventory (didn't pick up any items from the ground in the meantime)
-             */
-            if (attackerPlayer.getGameMode() != CREATIVE && attackerPlayer.getInventory().firstEmpty() != -1)
-                attackerPlayer.getInventory().addItem(e.getPotion().getItem()); // Returns the thrown potion
+                /*
+                 * If the player has consumed the potion (so he is not in creative) and
+                 * still has a free slot in the inventory (didn't pick up any items from the ground in the meantime)
+                 */
+                if (attackerPlayer.getGameMode() != CREATIVE && attackerPlayer.getInventory().firstEmpty() != -1)
+                    attackerPlayer.getInventory().addItem(e.getPotion().getItem()); // Returns the thrown potion
 
-            MessageUtil.sendChatMessage(attackerPlayer, Messages.getMessage("No hit when invisible"));
+                MessageUtil.sendChatMessage(attackerPlayer, Messages.getMessage("No hit when invisible"));
+            }
+
+            if (settings.disableInvisibilityOnHit()) {
+                // If the player becomes visibile before reaching (if set) the maximum invisibility time
+                if (fcPlayer.hasMaxInvisibilityTime())
+                    fcPlayer.cancelMaxInvisibilityTimeTask();
+
+                Bukkit.getPluginManager().callEvent(new BecomeVisibleEvent(fcPlayer, false));
+            }
+
             break;
         }
     }

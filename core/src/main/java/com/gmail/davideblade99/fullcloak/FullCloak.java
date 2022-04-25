@@ -241,7 +241,7 @@ public final class FullCloak extends JavaPlugin {
 
     private void registerListeners() {
         final PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerHit(), this);
+        pm.registerEvents(new PlayerHit(this), this);
         pm.registerEvents(new BecomeInvisible(this), this);
         pm.registerEvents(new BecomeVisible(this), this);
         pm.registerEvents(new PlayerJoin(), this);

@@ -52,6 +52,7 @@ public final class Settings {
     private final boolean hideViaCommand;
     private final boolean hideViaShift;
     private final boolean canHitWhenInvisible;
+    private final boolean disableInvisibilityOnHit;
 
     /*
      * Menu settings
@@ -146,6 +147,7 @@ public final class Settings {
         this.hideViaCommand = config.getBoolean("Invisible via command", true);
         this.hideViaShift = config.getBoolean("Invisible via Shift", true);
         this.canHitWhenInvisible = config.getBoolean("Allow invisible player hit", false);
+        this.disableInvisibilityOnHit = config.getBoolean("Disable invisibility on hit", false);
 
 
         // Menu settings
@@ -230,6 +232,10 @@ public final class Settings {
 
     public boolean canHitWhenInvisible() {
         return canHitWhenInvisible;
+    }
+
+    public boolean disableInvisibilityOnHit() {
+        return disableInvisibilityOnHit;
     }
 
     public Map<String, Menu> getMenus() {
