@@ -17,12 +17,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
 public final class PlayerMove implements Listener {
 
     private final FullCloak plugin;
 
-    public PlayerMove(final FullCloak instance) {
+    public PlayerMove(@NotNull final FullCloak instance) {
         this.plugin = instance;
     }
 

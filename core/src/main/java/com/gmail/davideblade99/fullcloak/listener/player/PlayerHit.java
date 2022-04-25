@@ -24,6 +24,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PotionSplashEvent;
+import org.jetbrains.annotations.NotNull;
 
 import static org.bukkit.GameMode.CREATIVE;
 
@@ -31,7 +32,7 @@ public final class PlayerHit implements Listener {
 
     private final FullCloak plugin;
 
-    public PlayerHit(final FullCloak instance) {
+    public PlayerHit(@NotNull final FullCloak instance) {
         this.plugin = instance;
     }
 

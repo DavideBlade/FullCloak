@@ -13,6 +13,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class MessageUtil {
 
@@ -23,7 +25,7 @@ public final class MessageUtil {
         throw new IllegalAccessError();
     }
 
-    public static void sendMessage(final Player receiver, final String message) {
+    public static void sendMessage(@NotNull final Player receiver, @NotNull final String message) {
         final FullCloak plugin = FullCloak.getInstance();
 
         switch (plugin.getSettings().getMessageType()) {
@@ -41,16 +43,16 @@ public final class MessageUtil {
         }
     }
 
-    public static void sendChatMessage(final CommandSender receiver, final String message) {
+    public static void sendChatMessage(@NotNull final CommandSender receiver, @Nullable final String message) {
         sendChatMessage(receiver, message, true);
     }
 
-    public static void sendChatMessage(final CommandSender receiver, final String[] messages, final boolean prefix) {
+    public static void sendChatMessage(@NotNull final CommandSender receiver, @NotNull final String[] messages, final boolean prefix) {
         for (String message : messages)
             sendChatMessage(receiver, message, prefix);
     }
 
-    public static void sendChatMessage(final CommandSender receiver, String message, final boolean prefix) {
+    public static void sendChatMessage(@NotNull final CommandSender receiver, @Nullable String message, final boolean prefix) {
         if (message == null || message.isEmpty())
             return;
 
@@ -60,15 +62,16 @@ public final class MessageUtil {
         receiver.sendMessage(colour(message));
     }
 
-    public static void sendMessageToConsole(final String message) {
+    public static void sendMessageToConsole(@Nullable final String message) {
         sendMessageToConsole(message, true);
     }
 
-    public static void sendMessageToConsole(final String message, final boolean prefix) {
+    public static void sendMessageToConsole(@Nullable final String message, final boolean prefix) {
         sendChatMessage(Bukkit.getConsoleSender(), message, prefix);
     }
 
-    public static String colour(final String toTranslate) {
+    @NotNull
+    public static String colour(@NotNull final String toTranslate) {
         return ChatColor.translateAlternateColorCodes(COLOR_CHAR, toTranslate);
     }
 
@@ -78,9 +81,11 @@ public final class MessageUtil {
      *
      * @param message    Message in the message file containing the placeholder
      * @param playerName Player name
+     *
      * @return Message with the player's name instead of the placeholder
      */
-    public static String replacePlayer(final String message, final String playerName) {
+    @NotNull
+    public static String replacePlayer(@NotNull final String message, @NotNull final String playerName) {
         return PlaceholderUtil.replacePlayer(Messages.getMessage(message), playerName);
     }
 
@@ -90,9 +95,11 @@ public final class MessageUtil {
      *
      * @param message Message in the message file containing the placeholder
      * @param player  Player to replace the placeholder
+     *
      * @return Message with the player's name in place of the placeholder
      */
-    public static String replacePlayer(final String message, final Player player) {
+    @NotNull
+    public static String replacePlayer(@NotNull final String message, @NotNull final Player player) {
         return replacePlayer(message, player.getName());
     }
 
@@ -102,9 +109,11 @@ public final class MessageUtil {
      *
      * @param message Message in the message file containing the placeholder
      * @param effect  Effect to be added to the message
+     *
      * @return Message with effect in place of placeholder
      */
-    public static String replaceEffect(final String message, final Effect effect) {
+    @NotNull
+    public static String replaceEffect(@NotNull final String message, @NotNull final Effect effect) {
         return PlaceholderUtil.replaceEffect(Messages.getMessage(message), effect);
     }
 
@@ -116,9 +125,11 @@ public final class MessageUtil {
      *
      * @param message Message in the message file containing the placeholder
      * @param seconds Seconds to be added to the message
+     *
      * @return Message with the number of seconds and the noun (singular or plural) replacing the placeholders
      */
-    public static String replaceSeconds(final String message, final long seconds) {
+    @NotNull
+    public static String replaceSeconds(@NotNull final String message, final long seconds) {
         return PlaceholderUtil.replacePlural(PlaceholderUtil.replaceSeconds(Messages.getMessage(message), seconds), Messages.getMessage(plural(seconds, "Second", "Seconds")));
     }
 
@@ -128,9 +139,11 @@ public final class MessageUtil {
      * @param amount   The amount of the noun
      * @param singular The singular form of the noun
      * @param plural   The plural form of the noun
+     *
      * @return The correctly formed noun
      */
-    private static String plural(final long amount, final String singular, final String plural) {
+    @NotNull
+    private static String plural(final long amount, @NotNull final String singular, @NotNull final String plural) {
         return amount == 1 ? singular : plural;
     }
 
@@ -147,9 +160,11 @@ public final class MessageUtil {
          *
          * @param message    Message containing the placeholder
          * @param playerName Player name
+         *
          * @return Message with the player's name instead of the placeholder
          */
-        private static String replacePlayer(final String message, final String playerName) {
+        @NotNull
+        private static String replacePlayer(@NotNull final String message, @NotNull final String playerName) {
             return message.replace(PLAYER_PLACEHOLDER, playerName);
         }
 
@@ -158,9 +173,11 @@ public final class MessageUtil {
          *
          * @param message Message containing the placeholder
          * @param effect  Effect to be added to the message
+         *
          * @return Message with effect in place of placeholder
          */
-        private static String replaceEffect(final String message, final Effect effect) {
+        @NotNull
+        private static String replaceEffect(@NotNull final String message, @NotNull final Effect effect) {
             return message.replace(EFFECT_PLACEHOLDER, effect.toString());
         }
 
@@ -169,9 +186,11 @@ public final class MessageUtil {
          *
          * @param message Message containing the placeholder
          * @param seconds Seconds to be added to the message
+         *
          * @return Message with the number of seconds replacing the placeholder
          */
-        private static String replaceSeconds(final String message, final long seconds) {
+        @NotNull
+        private static String replaceSeconds(@NotNull final String message, final long seconds) {
             return message.replace(SECONDS_PLACEHOLDER, String.valueOf(seconds));
         }
 
@@ -180,9 +199,11 @@ public final class MessageUtil {
          *
          * @param message Message containing the placeholder
          * @param noun    Name to be placed in the message
+         *
          * @return Message with the noun (singular or plural) replacing the placeholder
          */
-        private static String replacePlural(final String message, final String noun) {
+        @NotNull
+        private static String replacePlural(@NotNull final String message, @NotNull final String noun) {
             return message.replace(PLURAL_PLACEHOLDER, noun);
         }
     }

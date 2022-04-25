@@ -19,12 +19,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 
 public final class BecomeInvisible implements Listener {
 
     private final FullCloak plugin;
 
-    public BecomeInvisible(final FullCloak instance) {
+    public BecomeInvisible(@NotNull final FullCloak instance) {
         this.plugin = instance;
     }
 

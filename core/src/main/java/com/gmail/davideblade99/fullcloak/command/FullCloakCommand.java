@@ -25,6 +25,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,15 +39,16 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
     private final FullCloak plugin;
 
-    public FullCloakCommand(final FullCloak instance) {
+    public FullCloakCommand(@NotNull final FullCloak instance) {
         this.plugin = instance;
     }
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command cmd, @NotNull final String label, @NotNull final String[] args) {
         try {
             execute(sender, args);
-        } catch (final CommandException ex) {
+        }
+        catch (final CommandException ex) {
             if (ex.getMessage() != null && !ex.getMessage().isEmpty())
                 MessageUtil.sendChatMessage(sender, RED + ex.getMessage());
         }
@@ -53,8 +56,9 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    @NotNull
     @Override
-    public List<String> onTabComplete(final CommandSender sender, final Command cmd, final String alias, final String[] args) {
+    public List<String> onTabComplete(@NotNull final CommandSender sender, @NotNull final Command cmd, @NotNull final String alias, @NotNull final String[] args) {
         final List<String> completions = new ArrayList<>();
 
         switch (args.length) {
@@ -91,7 +95,7 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
         return completions;
     }
 
-    private void execute(final CommandSender sender, final String[] args) {
+    private void execute(@NotNull final CommandSender sender, @NotNull final String[] args) {
         if (args.length == 0) {
             final String[] message = {
                     "&8------------[&cFullCloak&8]------------",
@@ -298,24 +302,24 @@ public final class FullCloakCommand implements CommandExecutor, TabCompleter {
 
     private static final class CommandException extends RuntimeException {
 
-        CommandException(final String msg) {
+        CommandException(@Nullable final String msg) {
             super(msg);
         }
     }
 
     private static final class CommandValidator {
 
-        static void notNull(final Object o, final String msg) {
+        static void notNull(@Nullable final Object o, @Nullable final String msg) {
             if (o == null)
                 throw new CommandException(msg);
         }
 
-        static void isTrue(final boolean b, final String msg) {
+        static void isTrue(final boolean b, @Nullable final String msg) {
             if (!b)
                 throw new CommandException(msg);
         }
 
-        static void minLength(final Object[] array, final int minLength, final String msg) {
+        static void minLength(@NotNull final Object[] array, final int minLength, @Nullable final String msg) {
             if (array.length < minLength)
                 throw new CommandException(msg);
         }

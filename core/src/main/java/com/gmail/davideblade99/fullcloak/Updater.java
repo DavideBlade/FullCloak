@@ -9,6 +9,8 @@ package com.gmail.davideblade99.fullcloak;
 import com.gmail.davideblade99.fullcloak.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.IllegalPluginAccessException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,16 +27,16 @@ final class Updater {
          *
          * @param newVersion - the new version
          */
-        void onUpdateFound(final String newVersion);
+        void onUpdateFound(@Nullable final String newVersion);
     }
 
     private final FullCloak plugin;
 
-    Updater(final FullCloak instance) {
+    Updater(@NotNull final FullCloak instance) {
         this.plugin = instance;
     }
 
-    void checkForUpdate(final ResponseHandler responseHandler) {
+    void checkForUpdate(@NotNull final ResponseHandler responseHandler) {
         if (!plugin.getSettings().checkUpdate())
             return;
 
@@ -74,7 +76,7 @@ final class Updater {
     /**
      * Compare the version found with the plugin's version
      */
-    private boolean isNewerVersion(final String versionOnSpigot) {
+    private boolean isNewerVersion(@Nullable final String versionOnSpigot) {
         return !plugin.getDescription().getVersion().equals(versionOnSpigot);
     }
 }

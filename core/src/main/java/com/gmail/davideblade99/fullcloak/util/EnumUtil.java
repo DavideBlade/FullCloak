@@ -6,6 +6,9 @@
 
 package com.gmail.davideblade99.fullcloak.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public final class EnumUtil {
 
     private EnumUtil() {
@@ -21,7 +24,8 @@ public final class EnumUtil {
      * @param defaultEnum the default enum
      * @return the enum, {@code defaultEnum} if not found
      */
-    public static <E extends Enum<E>> E getEnum(final String value, final Class<E> enumClass, final E defaultEnum) {
+    @Nullable
+    public static <E extends Enum<E>> E getEnum(@NotNull final String value, @NotNull final Class<E> enumClass, @Nullable final E defaultEnum) {
         try {
             return Enum.valueOf(enumClass, value);
         } catch (final Exception ignored) {
@@ -38,7 +42,8 @@ public final class EnumUtil {
      * @param defaultEnum the default enum
      * @return the enum, {@code defaultEnum} if not found
      */
-    public static <E extends Enum<E>> E getEnumIgnoreCase(final String value, final Class<E> enumClass, final E defaultEnum) {
+    @Nullable
+    public static <E extends Enum<E>> E getEnumIgnoreCase(@Nullable final String value, @NotNull final Class<E> enumClass, @Nullable final E defaultEnum) {
         if (value == null)
             return defaultEnum;
 
@@ -50,11 +55,11 @@ public final class EnumUtil {
         return defaultEnum;
     }
 
-    public static <E extends Enum<E>> boolean isInEnum(final String value, final Class<E> enumClass) {
+    public static <E extends Enum<E>> boolean isInEnum(@NotNull final String value, @NotNull final Class<E> enumClass) {
         return getEnum(value, enumClass, null) != null;
     }
 
-    public static <E extends Enum<E>> boolean isInEnumIgnoreCase(final String value, final Class<E> enumClass) {
+    public static <E extends Enum<E>> boolean isInEnumIgnoreCase(@Nullable final String value, @NotNull final Class<E> enumClass) {
         return getEnumIgnoreCase(value, enumClass, null) != null;
     }
 }

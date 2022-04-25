@@ -10,6 +10,7 @@ import com.gmail.davideblade99.fullcloak.FullCloak;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public final class User {
 
@@ -21,11 +22,11 @@ public final class User {
     private int delayTaskId; // Task fired after delay time (makes the player invisible)
     private int maxInvisibilityTimeTaskId; // Task fired when maximum invisibility time is reached
 
-    User(final Player player) {
+    User(@NotNull final Player player) {
         this(player, FullCloak.getInstance().getSettings().getDefaultParticles());
     }
 
-    private User(final Player player, final Effect effect) {
+    private User(@NotNull final Player player, @NotNull final Effect effect) {
         this.player = player;
         this.effect = effect;
         this.invisible = false;
@@ -34,15 +35,17 @@ public final class User {
         this.delayTaskId = this.maxInvisibilityTimeTaskId = -1;
     }
 
+    @NotNull
     public Player getPlayer() {
         return this.player;
     }
 
+    @NotNull
     public Effect getEffect() {
         return this.effect;
     }
 
-    public void setEffect(final Effect effect) {
+    public void setEffect(@NotNull final Effect effect) {
         this.effect = effect;
     }
 

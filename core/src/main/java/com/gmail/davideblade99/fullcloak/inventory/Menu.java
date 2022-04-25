@@ -8,6 +8,7 @@ package com.gmail.davideblade99.fullcloak.inventory;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -17,16 +18,18 @@ public final class Menu {
     private final byte size;
     private final List<Item> items;
 
-    public Menu(final String title, final byte size, List<Item> items) {
+    public Menu(@NotNull final String title, final byte size, @NotNull final List<Item> items) {
         this.title = title;
         this.size = size;
         this.items = items;
     }
 
+    @NotNull
     public String getTitle() {
         return title;
     }
 
+    @NotNull
     public Inventory getInventory() {
         final Inventory inventory = Bukkit.createInventory(new MenuInventoryHolder(this), size, title);
 
@@ -40,6 +43,7 @@ public final class Menu {
         return inventory;
     }
 
+    @NotNull
     public List<Item> getItems() {
         return items;
     }

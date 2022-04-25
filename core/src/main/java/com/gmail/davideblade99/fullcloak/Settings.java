@@ -19,6 +19,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -154,6 +156,7 @@ public final class Settings {
         loadMenuSettings(config);
     }
 
+    @NotNull
     Language getLanguage() {
         return lang;
     }
@@ -178,6 +181,7 @@ public final class Settings {
         return sendCooldownMessage;
     }
 
+    @NotNull
     public MessageType getMessageType() {
         return messageType;
     }
@@ -194,6 +198,7 @@ public final class Settings {
         return maxTimeInvisible;
     }
 
+    @NotNull
     public Effect getDefaultParticles() {
         return defaultParticles;
     }
@@ -238,15 +243,17 @@ public final class Settings {
         return disableInvisibilityOnHit;
     }
 
+    @NotNull
     public Map<String, Menu> getMenus() {
         return menus;
     }
 
-    public Menu getMenu(final String menuName) {
+    @Nullable
+    public Menu getMenu(@NotNull final String menuName) {
         return menus.get(menuName.toLowerCase());
     }
 
-    private void loadMenuSettings(final FileConfiguration config) {
+    private void loadMenuSettings(@NotNull final FileConfiguration config) {
         final ConfigurationSection menus = config.getConfigurationSection("Menus");
 
         // Check if there are menus

@@ -9,6 +9,8 @@ package com.gmail.davideblade99.fullcloak.inventory;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 
@@ -18,7 +20,7 @@ public final class Item extends ItemStack {
     private final String command;
     private final boolean keepOpen;
 
-    public Item(final Material type, final short damage, final String displayName, final String lore, final byte slot, final String command, final boolean keepOpen) {
+    public Item(@NotNull final Material type, final short damage, @Nullable final String displayName, @Nullable final String lore, final byte slot, @Nullable final String command, final boolean keepOpen) {
         super(type, 1, damage);
 
         this.slot = slot;
@@ -42,6 +44,7 @@ public final class Item extends ItemStack {
         return slot;
     }
 
+    @Nullable
     public String getCommand() {
         return command;
     }

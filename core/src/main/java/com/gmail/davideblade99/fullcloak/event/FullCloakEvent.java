@@ -7,6 +7,7 @@
 package com.gmail.davideblade99.fullcloak.event;
 
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class FullCloakEvent extends Event {
 
@@ -14,6 +15,7 @@ public abstract class FullCloakEvent extends Event {
         super(false);
     }
 
+    @NotNull
     @Override
     public final String getEventName() {
         return getClass().getSimpleName();

@@ -17,12 +17,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 
 public final class BecomeVisible implements Listener {
 
     private final FullCloak plugin;
 
-    public BecomeVisible(final FullCloak instance) {
+    public BecomeVisible(@NotNull final FullCloak instance) {
         this.plugin = instance;
     }
 

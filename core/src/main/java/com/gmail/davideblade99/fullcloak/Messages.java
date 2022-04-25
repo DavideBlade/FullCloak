@@ -11,6 +11,8 @@ import com.gmail.davideblade99.fullcloak.util.MessageUtil;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
@@ -56,7 +58,8 @@ public final class Messages {
         throw new IllegalAccessError();
     }
 
-    public static String getMessage(final String string) {
+    @Nullable
+    public static String getMessage(@NotNull final String string) {
         return CONFIGURATION.getString(string);
     }
 
@@ -101,7 +104,7 @@ public final class Messages {
         }
     }
 
-    private static void loadMessages(final File messagesFile) throws InvalidConfigurationException {
+    private static void loadMessages(@NotNull final File messagesFile) throws InvalidConfigurationException {
         try {
             CONFIGURATION.load(messagesFile);
         } catch (final Exception e) {
@@ -121,7 +124,7 @@ public final class Messages {
         return true;
     }
 
-    private static boolean find(final String path) {
+    private static boolean find(@NotNull final String path) {
         return CONFIGURATION.isSet(path);
     }
 

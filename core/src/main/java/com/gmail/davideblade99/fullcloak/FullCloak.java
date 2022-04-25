@@ -25,6 +25,7 @@ import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
 
 public final class FullCloak extends JavaPlugin {
 
@@ -65,7 +66,7 @@ public final class FullCloak extends JavaPlugin {
         final String pluginVersion = getDescription().getVersion();
         new Updater(this).checkForUpdate(new ResponseHandler() {
             @Override
-            public void onUpdateFound(final String newVersion) {
+            public void onUpdateFound(@Nullable final String newVersion) {
                 final String currentVersion = pluginVersion.contains(" ") ? pluginVersion.split(" ")[0] : pluginVersion;
 
                 MessageUtil.sendMessageToConsole("&bFound a new version: " + newVersion + " (Yours: v" + currentVersion + ")");

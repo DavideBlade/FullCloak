@@ -7,6 +7,7 @@
 package com.gmail.davideblade99.fullcloak.util;
 
 import com.gmail.davideblade99.fullcloak.FullCloak;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +28,7 @@ public final class FileUtil {
      * @param inFile  the name of embedded file to be copied
      * @param outFile the file where specified embedded file should be copied
      */
-    public static void copyFile(final String inFile, final File outFile) {
+    public static void copyFile(@NotNull final String inFile, @NotNull final File outFile) {
         outFile.getParentFile().mkdirs(); // Create output folder
 
         // Copy contents of inFile to outFile

@@ -13,11 +13,12 @@ import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public final class Title_v1_17_R1 implements Title {
 
     @Override
-    public void sendTitle(final Player player, final String msgTitle, final String msgSubTitle, final int ticks) {
+    public void sendTitle(@NotNull final Player player, @NotNull final String msgTitle, @NotNull final String msgSubTitle, final int ticks) {
         // When tested, Player#sendTitle() did not work properly
 
         final ClientboundSetTitlesAnimationPacket times = new ClientboundSetTitlesAnimationPacket(20, ticks, 20);
