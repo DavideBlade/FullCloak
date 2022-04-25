@@ -155,8 +155,8 @@ public final class FullCloak extends JavaPlugin {
     public void reloadPlugin() {
         System.setProperty("FullCloakReloaded", "1"); // This is used to determine whether the /fullcloak reload command has been used
 
-        Bukkit.getPluginManager().disablePlugin(this);
-        Bukkit.getPluginManager().enablePlugin(this);
+        setEnabled(false);
+        setEnabled(true);
 
         System.clearProperty("FullCloakReloaded");
     }
