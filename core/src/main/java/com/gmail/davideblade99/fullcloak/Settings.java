@@ -51,6 +51,7 @@ public final class Settings {
     private final boolean invisibleToMobs;
     private final boolean hideViaCommand;
     private final boolean hideViaShift;
+    private final boolean canHitWhenInvisible;
 
     /*
      * Menu settings
@@ -61,8 +62,7 @@ public final class Settings {
         if (!CONFIG_FILE.exists()) {
             if (System.getProperty("FullCloakReloaded") == null) // If the plugin has not been reloaded with /fulcloak reload
                 FileUtil.copyFile("config.yml", CONFIG_FILE);
-            else
-            {
+            else {
                 /*
                  * When the plugin is reloaded with /fullcloak reload the files within
                  * the .jar are not detected. So if the files have been deleted from the
@@ -128,8 +128,8 @@ public final class Settings {
         // Global settings
         this.lang = locale;
         this.checkUpdate = config.getBoolean("Check update", true);
-        this.disableWithOnePlayer = config.getBoolean("Disable with only a player");
-        this.delayBeforeInvisible = (short) config.getInt("Delay before invisible");
+        this.disableWithOnePlayer = config.getBoolean("Disable with only a player", false);
+        this.delayBeforeInvisible = (short) config.getInt("Delay before invisible", 0);
         this.cooldownTime = (short) config.getInt("Cooldown time", 5);
         this.sendCooldownMessage = config.getBoolean("Cooldown message", true);
         this.messageType = messageType;
@@ -142,9 +142,10 @@ public final class Settings {
         this.messageWhenBecomeVisible = config.getBoolean("Message when become visible", true);
         this.enabledWorlds = enabledWorlds;
         this.canHideWhenTagged = config.getBoolean("Can hide when tagged", true);
-        this.invisibleToMobs = config.getBoolean("Invisible to mobs");
+        this.invisibleToMobs = config.getBoolean("Invisible to mobs", false);
         this.hideViaCommand = config.getBoolean("Invisible via command", true);
         this.hideViaShift = config.getBoolean("Invisible via Shift", true);
+        this.canHitWhenInvisible = config.getBoolean("Allow invisible player hit", false);
 
 
         // Menu settings
@@ -225,6 +226,10 @@ public final class Settings {
 
     boolean canHideViaShift() {
         return hideViaShift;
+    }
+
+    public boolean canHitWhenInvisible() {
+        return canHitWhenInvisible;
     }
 
     public Map<String, Menu> getMenus() {

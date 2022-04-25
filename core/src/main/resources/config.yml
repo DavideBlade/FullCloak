@@ -48,6 +48,8 @@ Invisible to mobs: false
 Invisible via command: true
 # Set to false if players can't become invisible when crouching (using the Shift key).
 Invisible via Shift: true
+# Set to false to prevent invisible players from hitting other players (even with potions).
+Allow invisible player hit: false
 ############################################################
 # +------------------------------------------------------+ #
 # |                     MENU ITEMS                       | #

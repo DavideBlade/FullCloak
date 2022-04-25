@@ -6,6 +6,7 @@
 
 package com.gmail.davideblade99.fullcloak.listener.player;
 
+import com.gmail.davideblade99.fullcloak.FullCloak;
 import com.gmail.davideblade99.fullcloak.Messages;
 import com.gmail.davideblade99.fullcloak.user.UserManager;
 import com.gmail.davideblade99.fullcloak.util.MessageUtil;
@@ -38,8 +39,11 @@ public final class PlayerHit implements Listener {
         final Player attackerPlayer = (Player) attacker;
         if (attackerPlayer.equals(target)) // If the player hit himself
             return;
+        if (!UserManager.getUser(attackerPlayer).isInvisible()) // If not hidden
+            return;
 
-        if (UserManager.getUser(attackerPlayer).isInvisible()) {
+        // If invisible players can't hit other players
+        if (!FullCloak.getInstance().getSettings().canHitWhenInvisible()) {
             event.setCancelled(true);
 
             MessageUtil.sendChatMessage(attackerPlayer, Messages.getMessage("No hit when invisible"));
@@ -53,7 +57,9 @@ public final class PlayerHit implements Listener {
             return;
 
         final Player attackerPlayer = (Player) attacker;
-        if (!UserManager.getUser(attackerPlayer).isInvisible())
+        if (!UserManager.getUser(attackerPlayer).isInvisible()) // If not hidden
+            return;
+        if (FullCloak.getInstance().getSettings().canHitWhenInvisible()) // If invisible players can "hit" other players
             return;
 
         for (LivingEntity target : e.getAffectedEntities()) {
