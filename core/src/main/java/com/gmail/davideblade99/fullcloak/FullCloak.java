@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class FullCloak extends JavaPlugin {
 
-    private final static String[] SUPPORTED_VERSIONS = {"1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18"};
+    private final static String[] SUPPORTED_VERSIONS = {"1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19"};
 
     private static FullCloak instance;
 
@@ -199,7 +199,8 @@ public final class FullCloak extends JavaPlugin {
          * "v1_16_R3" -> Server is running 1.16.4 or 1.16.5
          * "v1_17_R1" -> Server runs from 1.17 to 1.17.1
          * "v1_18_R1" -> Server runs from 1.18 to 1.18.1
-         * "v1_18_R2" -> Server runs 1.18.2 (currently)
+         * "v1_18_R2" -> Server runs 1.18.2
+         * "v1_19_R1" -> Server runs 1.19 (currently)
          */
 
         try {

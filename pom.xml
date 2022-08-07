@@ -7,7 +7,7 @@
     <groupId>com.gmail.davideblade99.fullcloak</groupId>
     <artifactId>fullcloak-parent</artifactId>
     <name>FullCloak Parent</name>
-    <version>3.4.1</version>
+    <version>3.4.2</version>
     <packaging>pom</packaging>
 
     <url>https://davideblade.github.io</url>
@@ -23,6 +23,7 @@
     <modules>
         <module>core</module>
         <module>dist</module>
+        <module>v1_19_R1</module>
         <module>v1_18_R2</module>
         <module>v1_18_R1</module>
         <module>v1_17_R1</module>
@@ -156,6 +157,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>fullcloak-nms-v1_18_r2</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>fullcloak-nms-v1_19_r1</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
