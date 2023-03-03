@@ -10,8 +10,8 @@
         <version>3.4.2</version>
     </parent>
 
-    <artifactId>fullcloak-nms-v1_19_r1</artifactId>
-    <name>FullCloak NMS v1_19_R1</name>
+    <artifactId>fullcloak-nms-v1_19_r2</artifactId>
+    <name>FullCloak NMS v1_19_R2</name>
     <packaging>jar</packaging>
 
     <repositories>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

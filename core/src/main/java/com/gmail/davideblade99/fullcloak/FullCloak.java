@@ -200,7 +200,8 @@ public final class FullCloak extends JavaPlugin {
          * "v1_17_R1" -> Server runs from 1.17 to 1.17.1
          * "v1_18_R1" -> Server runs from 1.18 to 1.18.1
          * "v1_18_R2" -> Server runs 1.18.2
-         * "v1_19_R1" -> Server runs 1.19 (currently)
+         * "v1_19_R1" -> Server runs from 1.19 to 1.19.2
+         * "v1_19_R2" -> Server runs 1.19.3 (currently)
          */
 
         try {

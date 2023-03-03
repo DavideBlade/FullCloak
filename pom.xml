@@ -23,6 +23,7 @@
     <modules>
         <module>core</module>
         <module>dist</module>
+        <module>v1_19_R2</module>
         <module>v1_19_R1</module>
         <module>v1_18_R2</module>
         <module>v1_18_R1</module>
@@ -163,6 +164,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>fullcloak-nms-v1_19_r1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>fullcloak-nms-v1_19_r2</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
