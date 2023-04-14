@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.gmail.davideblade99.fullcloak</groupId>
         <artifactId>fullcloak-parent</artifactId>
-        <version>3.4.2</version>
+        <version>3.4.3</version>
     </parent>
 
     <artifactId>fullcloak-dist</artifactId>
@@ -156,16 +156,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>fullcloak-nms-v1_18_r2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>fullcloak-nms-v1_19_r1</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>fullcloak-nms-v1_19_r2</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -77,8 +77,7 @@ public final class FullCloak extends JavaPlugin {
 
         try {
             Messages.checkMessages();
-        }
-        catch (final InvalidConfigurationException ignored) {
+        } catch (final InvalidConfigurationException ignored) {
             disablePlugin();
             return;
         }
@@ -144,13 +143,12 @@ public final class FullCloak extends JavaPlugin {
     }
 
     /**
-     * Reload the plugin safely by performing the whole disabling phase and then the enabling phase.
-     * It is not designed to allow loading a new .jar (and never will be).
-     * In that case the whole server must be restarted/reloaded to avoid problems.
-     * More specifically, it is necessary to restart the whole server as this
-     * allows Spigot to unload the current .jar file from the JVM and load the updated one.
-     * If the .jar is replaced and then the plugin is reloaded, nothing will happen:
-     * the old .jar will be the one used as if it had never been replaced.
+     * Reload the plugin safely by performing the whole disabling phase and then the enabling phase. It is not
+     * designed to allow loading a new .jar (and never will be). In that case the whole server must be
+     * restarted/reloaded to avoid problems. More specifically, it is necessary to restart the whole server as this
+     * allows Spigot to unload the current .jar file from the JVM and load the updated one. If the .jar is replaced
+     * and then the plugin is reloaded, nothing will happen: the old .jar will be the one used as if it had never
+     * been replaced.
      */
     public void reloadPlugin() {
         System.setProperty("FullCloakReloaded", "1"); // This is used to determine whether the /fullcloak reload command has been used
@@ -201,15 +199,28 @@ public final class FullCloak extends JavaPlugin {
          * "v1_18_R1" -> Server runs from 1.18 to 1.18.1
          * "v1_18_R2" -> Server runs 1.18.2
          * "v1_19_R1" -> Server runs from 1.19 to 1.19.2
-         * "v1_19_R2" -> Server runs 1.19.3 (currently)
+         * "v1_19_R2" -> Server runs 1.19.3
+         * "v1_19_R3" -> Server runs 1.19.4 (currently)
          */
 
         try {
+            /*
+             * As of 1.19, working APIs for titles and action bars have been introduced,
+             * so it is no longer necessary to use NMS for later versions.
+             * If the version exceeds 1.18, it uses the default interface methods.
+             */
+            final String[] split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
+            if (Integer.parseInt(split[0]) > 1 // Major version (e.g. "1" for "1.10" and "2" for "2.10")
+                    || Integer.parseInt(split[1]) > 18) { // Minor version (e.g. "10" for "1.10" and "19" for "1.19")
+
+                actionbar = new ActionBar() { }; // Default implementation
+                return true;
+            }
+
             String packageName = FullCloak.class.getPackage().getName();
             String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             actionbar = (ActionBar) Class.forName(packageName + ".nms.ActionBar_" + internalsName).getDeclaredConstructor().newInstance();
-        }
-        catch (final Exception unknownVersion) {
+        } catch (final Exception unknownVersion) {
             return false;
         }
 
@@ -218,11 +229,23 @@ public final class FullCloak extends JavaPlugin {
 
     private boolean setupTitle() {
         try {
+            /*
+             * As of 1.19, working APIs for titles and action bars have been introduced,
+             * so it is no longer necessary to use NMS for later versions.
+             * If the version exceeds 1.18, it uses the default interface methods.
+             */
+            final String[] split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
+            if (Integer.parseInt(split[0]) > 1 // Major version (e.g. "1" for "1.10" and "2" for "2.10")
+                    || Integer.parseInt(split[1]) > 18) { // Minor version (e.g. "10" for "1.10" and "19" for "1.19")
+
+                title = new Title() { }; // Default implementation
+                return true;
+            }
+
             String packageName = FullCloak.class.getPackage().getName();
             String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             title = (Title) Class.forName(packageName + ".nms.Title_" + internalsName).getDeclaredConstructor().newInstance();
-        }
-        catch (final Exception unknownVersion) {
+        } catch (final Exception unknownVersion) {
             return false;
         }
 
