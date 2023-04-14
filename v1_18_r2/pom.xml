@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>fullcloak-nms-v1_18_r2</artifactId>
-    <name>FullCloak NMS v1_18_r2</name>
+    <name>FullCloak NMS v1_18_R2</name>
     <packaging>jar</packaging>
 
     <repositories>
