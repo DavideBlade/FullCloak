@@ -7,11 +7,11 @@
     <parent>
         <groupId>com.gmail.davideblade99.fullcloak</groupId>
         <artifactId>fullcloak-parent</artifactId>
-        <version>3.4.2</version>
+        <version>3.4.3</version>
     </parent>
 
     <artifactId>fullcloak-nms-v1_18_r2</artifactId>
-    <name>FullCloak NMS v1_18_R2</name>
+    <name>FullCloak NMS v1_18_r2</name>
     <packaging>jar</packaging>
 
     <repositories>
