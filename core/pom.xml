@@ -16,6 +16,8 @@
     <packaging>jar</packaging>
 
     <build>
+        <finalName>FullCloak</finalName>
+
         <resources>
             <resource>
                 <directory>src/main/resources/</directory>

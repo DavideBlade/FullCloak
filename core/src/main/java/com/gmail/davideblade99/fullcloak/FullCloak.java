@@ -11,8 +11,6 @@ import com.gmail.davideblade99.fullcloak.command.FullCloakCommand;
 import com.gmail.davideblade99.fullcloak.inventory.MenuInventoryHolder;
 import com.gmail.davideblade99.fullcloak.listener.inventory.MenuClick;
 import com.gmail.davideblade99.fullcloak.listener.player.*;
-import com.gmail.davideblade99.fullcloak.nms.ActionBar;
-import com.gmail.davideblade99.fullcloak.nms.Title;
 import com.gmail.davideblade99.fullcloak.user.UserManager;
 import com.gmail.davideblade99.fullcloak.util.MessageUtil;
 import net.minelink.ctplus.CombatTagPlus;
@@ -29,17 +27,18 @@ import org.jetbrains.annotations.Nullable;
 
 public final class FullCloak extends JavaPlugin {
 
-    private final static String[] SUPPORTED_VERSIONS = {"1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19"};
+    private final static String[] SUPPORTED_VERSIONS = {"1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20"};
 
     private static FullCloak instance;
 
-    private ActionBar actionbar;
-    private Title title;
     private CombatTagPlus combatTagPlus;
     private Settings settings;
 
     @Override
     public void onEnable() {
+        //TODO: aggiungere suoni
+        //TODO: suggerimenti: https://www.spigotmc.org/conversations/fullcloak.494080/
+
         instance = this;
 
         if (!checkVersion()) {
@@ -47,19 +46,6 @@ public final class FullCloak extends JavaPlugin {
             disablePlugin();
             return;
         }
-
-        if (!setupActionbar()) {
-            MessageUtil.sendMessageToConsole("&cFailed to setup action bar. Your server version is not unknown.");
-            disablePlugin();
-            return;
-        }
-
-        if (!setupTitle()) {
-            MessageUtil.sendMessageToConsole("&cFailed to setup title. Your server version is not unknown.");
-            disablePlugin();
-            return;
-        }
-
 
         this.settings = new Settings();
 
@@ -108,8 +94,6 @@ public final class FullCloak extends JavaPlugin {
         HandlerList.unregisterAll(this);
 
         instance = null;
-        actionbar = null;
-        title = null;
         combatTagPlus = null;
         settings = null;
 
@@ -118,14 +102,6 @@ public final class FullCloak extends JavaPlugin {
 
     public Settings getSettings() {
         return settings;
-    }
-
-    public ActionBar getActionbar() {
-        return actionbar;
-    }
-
-    public Title getTitle() {
-        return title;
     }
 
     public CombatTagPlus getCombatTagPlugin() {
@@ -143,12 +119,11 @@ public final class FullCloak extends JavaPlugin {
     }
 
     /**
-     * Reload the plugin safely by performing the whole disabling phase and then the enabling phase. It is not
-     * designed to allow loading a new .jar (and never will be). In that case the whole server must be
-     * restarted/reloaded to avoid problems. More specifically, it is necessary to restart the whole server as this
-     * allows Spigot to unload the current .jar file from the JVM and load the updated one. If the .jar is replaced
-     * and then the plugin is reloaded, nothing will happen: the old .jar will be the one used as if it had never
-     * been replaced.
+     * Reload the plugin safely by performing the whole disabling phase and then the enabling phase. It is not designed to
+     * allow loading a new .jar (and never will be). In that case the whole server must be restarted/reloaded to avoid
+     * problems. More specifically, it is necessary to restart the whole server as this allows Spigot to unload the current
+     * .jar file from the JVM and load the updated one. If the .jar is replaced and then the plugin is reloaded, nothing will
+     * happen: the old .jar will be the one used as if it had never been replaced.
      */
     public void reloadPlugin() {
         System.setProperty("FullCloakReloaded", "1"); // This is used to determine whether the /fullcloak reload command has been used
@@ -173,80 +148,6 @@ public final class FullCloak extends JavaPlugin {
                 MessageUtil.sendMessageToConsole("&cCombatTagPlus wasn't enabled.");
                 return false;
             }
-        }
-
-        return true;
-    }
-
-    private boolean setupActionbar() {
-        /*
-         * "v1_8_R1" -> Server is running 1.8 or 1.8.1
-         * "v1_8_R2" -> Server is running 1.8.3
-         * "v1_8_R3" -> Server is running 1.8.8
-         * "v1_9_R1" -> Server is running 1.9 or 1.9.2
-         * "v1_9_R2" -> Server is running 1.9.4
-         * "v1_10_R1" -> Server is running 1.10.x
-         * "v1_11_R1" -> Server is running 1.11.x
-         * "v1_12_R1" -> Server is running 1.12.x
-         * "v1_13_R1" -> Server is running 1.13
-         * "v1_13_R2" -> Server is running 1.13.1 or 1.13.2
-         * "v1_14_R1" -> Server runs from 1.14.x
-         * "v1_15_R1" -> Server runs from 1.15.x
-         * "v1_16_R1" -> Server is running 1.16 or 1.16.1
-         * "v1_16_R2" -> Server is running 1.16.2 or 1.16.3
-         * "v1_16_R3" -> Server is running 1.16.4 or 1.16.5
-         * "v1_17_R1" -> Server runs from 1.17 to 1.17.1
-         * "v1_18_R1" -> Server runs from 1.18 to 1.18.1
-         * "v1_18_R2" -> Server runs 1.18.2
-         * "v1_19_R1" -> Server runs from 1.19 to 1.19.2
-         * "v1_19_R2" -> Server runs 1.19.3
-         * "v1_19_R3" -> Server runs 1.19.4 (currently)
-         */
-
-        try {
-            /*
-             * As of 1.19, working APIs for titles and action bars have been introduced,
-             * so it is no longer necessary to use NMS for later versions.
-             * If the version exceeds 1.18, it uses the default interface methods.
-             */
-            final String[] split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
-            if (Integer.parseInt(split[0]) > 1 // Major version (e.g. "1" for "1.10" and "2" for "2.10")
-                    || Integer.parseInt(split[1]) > 18) { // Minor version (e.g. "10" for "1.10" and "19" for "1.19")
-
-                actionbar = new ActionBar() { }; // Default implementation
-                return true;
-            }
-
-            String packageName = FullCloak.class.getPackage().getName();
-            String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            actionbar = (ActionBar) Class.forName(packageName + ".nms.ActionBar_" + internalsName).getDeclaredConstructor().newInstance();
-        } catch (final Exception unknownVersion) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean setupTitle() {
-        try {
-            /*
-             * As of 1.19, working APIs for titles and action bars have been introduced,
-             * so it is no longer necessary to use NMS for later versions.
-             * If the version exceeds 1.18, it uses the default interface methods.
-             */
-            final String[] split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
-            if (Integer.parseInt(split[0]) > 1 // Major version (e.g. "1" for "1.10" and "2" for "2.10")
-                    || Integer.parseInt(split[1]) > 18) { // Minor version (e.g. "10" for "1.10" and "19" for "1.19")
-
-                title = new Title() { }; // Default implementation
-                return true;
-            }
-
-            String packageName = FullCloak.class.getPackage().getName();
-            String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            title = (Title) Class.forName(packageName + ".nms.Title_" + internalsName).getDeclaredConstructor().newInstance();
-        } catch (final Exception unknownVersion) {
-            return false;
         }
 
         return true;

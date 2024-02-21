@@ -8,6 +8,8 @@ package com.gmail.davideblade99.fullcloak.util;
 
 import com.gmail.davideblade99.fullcloak.FullCloak;
 import com.gmail.davideblade99.fullcloak.Messages;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -34,11 +36,11 @@ public final class MessageUtil {
                 break;
 
             case TITLE:
-                plugin.getTitle().sendTitle(receiver, "", colour(message), 60);
+                receiver.sendTitle("", colour(message), 20, 60, 20);
                 break;
 
             case ACTIONBAR:
-                plugin.getActionbar().sendActionBar(receiver, colour(message));
+                receiver.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(colour(message)));
                 break;
         }
     }
