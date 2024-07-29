@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class FullCloak extends JavaPlugin {
 
-    private final static String[] SUPPORTED_VERSIONS = {"1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20"};
+    private final static String[] SUPPORTED_VERSIONS = {"1.11", "1.12", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20", "1.21"};
 
     private static FullCloak instance;
 
@@ -36,9 +36,6 @@ public final class FullCloak extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        //TODO: aggiungere suoni
-        //TODO: suggerimenti: https://www.spigotmc.org/conversations/fullcloak.494080/
-
         instance = this;
 
         if (!checkVersion()) {

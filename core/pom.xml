@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.gmail.davideblade99.fullcloak</groupId>
         <artifactId>fullcloak-parent</artifactId>
-        <version>3.4.5</version>
+        <version>3.4.6</version>
     </parent>
 
     <artifactId>fullcloak-core</artifactId>
     <name>FullCloak Plugin</name>
-    <version>3.4.5</version>
+    <version>3.4.6</version>
     <packaging>jar</packaging>
 
     <build>
